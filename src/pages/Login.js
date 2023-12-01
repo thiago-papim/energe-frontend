@@ -32,7 +32,6 @@ export default function Login() {
         return 0;
       }
     };
-
     checkAuthentication();
   }, [history, localhost]);
 
