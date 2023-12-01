@@ -24,7 +24,7 @@ export default function Login() {
     }
     const checkAuthentication = async () => {
       try {
-        const tes = await axios.get('https://147.182.197.156:3001/login/token');
+        const tes = await axios.get('http://147.182.197.156:3001/login/token');
         console.log(tes);
         history.push('/admin');
       } catch (error) {
@@ -50,7 +50,7 @@ export default function Login() {
     formData.append('username', user);
     formData.append('password', password);
     try {
-      const response = await axios.post('https://147.182.197.156:3001/login', formData);
+      const response = await axios.post('http://147.182.197.156:3001/login', formData);
       console.log(response);
       if (response.status === 200) {
         const { token } = response.data;
