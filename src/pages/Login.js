@@ -77,7 +77,7 @@ export default function Login() {
             <LockOutlinedIcon />
           </Avatar>
           <Typography component="h1" variant="h6" className="mb-5">
-            Login
+            Loginn
           </Typography>
           <div
             className="pb-8"
