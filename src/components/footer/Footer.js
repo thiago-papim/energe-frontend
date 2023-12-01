@@ -1,74 +1,91 @@
 import React from 'react';
+import { Typography } from '@mui/material';
+import { facebookIcon } from '../../imagens/iconSvg/facebookSvg';
+import { whatsappIcon } from '../../imagens/iconSvg/whatsappSvg';
+import { instagramIcon } from '../../imagens/iconSvg/instagramSgv';
+import { relogioIcon } from '../../imagens/iconSvg/relogioSvg';
 
-import WhatsAppIcon from '@mui/icons-material/WhatsApp';
-import InstagramIcon from '@mui/icons-material/Instagram';
-import LocalPhoneIcon from '@mui/icons-material/LocalPhone';
-
-class Footer extends React.Component {
-  render() {
-    return (
-      <div className="h-[200px] bg-[#eae6e3] w-full flex flex-col items-start">
-        <div className="flex justify-center w-[100%] mb-10">
-          <button>
-            <WhatsAppIcon
-              className="hover:text-green-700 text-[#8792ad] mr-10"
-              style={ { fontSize: '2.5rem' } }
-            />
-          </button>
-          <button>
-            <InstagramIcon
-              className="hover:text-violet-500 text-[#8792ad]"
-              style={ { fontSize: '2.5rem' } }
-            />
-          </button>
-        </div>
-        <div>
-          <div
-            className="flex"
-          >
-            <div
-              className="flex flex-col items-start mr-6"
-            >
-              <p
-                className="text-red-700 font-bold"
-              >
-                Fale Conosco
-
-              </p>
-              <p>das 08:00 ás 17:00 de Seg. a Sex.</p>
-            </div>
-            <div>
-              <p>
-                (11) 4361-1703
-              </p>
-              <p>
-                (11) 4173-1464
-              </p>
-            </div>
-          </div>
-          <div
-            className="flex justify-center"
-          >
-            <div
-              className="flex items-start mr-2 mt-10"
-            >
-              <LocalPhoneIcon className="mr-1" />
-              <p
-                className="text-red-700 font-bold"
-              >
-                ATENDIMENTO DE EMERGÊNCIA 24 HORAS:
-              </p>
-            </div>
-            <div className="flex items-start mt-10">
-              <p>
-                (11) 98407-0434
-              </p>
-            </div>
-          </div>
-        </div>
+export default function Footer() {
+  return (
+    <div className="min-h-[200px] bg-[#000]">
+      <div className="flex items-center justify-center pt-3">
+        { facebookIcon }
+        { instagramIcon }
+        { whatsappIcon }
       </div>
-    );
-  }
+      <div className="flex justify-center mt-4">
+        <Typography
+          variant="overline"
+          display="block"
+          gutterBottom
+          className="mx-2 teste"
+          style={ { color: '#9698a0' } }
+        >
+          Quem somos
+        </Typography>
+        <Typography
+          variant="overline"
+          display="block"
+          gutterBottom
+          className="mx-2"
+          style={ { color: '#9698a0' } }
+        >
+          Serviços
+        </Typography>
+        <Typography
+          variant="overline"
+          display="block"
+          gutterBottom
+          className="mx-2"
+          style={ { color: '#9698a0' } }
+        >
+          Contato
+        </Typography>
+        <Typography
+          variant="overline"
+          display="block"
+          gutterBottom
+          className="mx-2"
+          style={ { color: '#9698a0' } }
+        >
+          Voltar ao início
+        </Typography>
+      </div>
+      <div
+        className="flex
+      items-center justify-center border-y-2 p-3 border-[#9698a0]"
+      >
+        <div className="flex flex-col mr-4">
+          <Typography
+            variant="subtitle2"
+            gutterBottom
+            className="text-center"
+            style={ { color: '#9698a0' } }
+          >
+            Atendimendo de Emergência
+          </Typography>
+          <Typography
+            variant="subtitle2"
+            gutterBottom
+            className="text-center"
+            style={ { color: '#9698a0' } }
+          >
+            (11) 9.8407-0434
+          </Typography>
+        </div>
+        { relogioIcon }
+      </div>
+      <div>
+        <Typography
+          variant="overline"
+          display="block"
+          gutterBottom
+          className="mx-2 text-center"
+          style={ { color: '#9698a0' } }
+        >
+          ENERGE © 2023 - TODOS OS DIREITOS RESERVADOS
+        </Typography>
+      </div>
+    </div>
+  );
 }
-
-export default Footer;

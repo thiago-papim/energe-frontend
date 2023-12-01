@@ -59,7 +59,7 @@ export default function Header() {
     <ThemeProvider theme={ theme }>
       <header
         className="flex justify-between items-center mx-auto
-        border-b-2 rounded-lg shadow-md bg-[#fafafa]"
+        border-b-2 shadow-md bg-[#fafafa]"
       >
         <button
           className="flex"

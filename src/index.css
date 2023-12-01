@@ -7,3 +7,38 @@
   border-color: aqua;
   background-color: aqua;
 }
+
+.facebook {
+  border: 0;
+  fill: #4e4f52;
+  margin-left: 5px;
+  margin-right: 5px;
+  transition: fill 0.8s;
+  width: 30px;
+}
+
+.whatsapp {
+  border: 0;
+  fill: #4e4f52;
+  margin-left: 5px;
+  margin-right: 5px;
+  transition: fill 0.8s;
+  width: 35px;
+}
+
+.instagram {
+  fill: #4e4f52;
+  margin-left: 5px;
+  margin-right: 5px;
+  transition: fill 0.8s; /* Adiciona uma transição suave para a mudança de cor */
+  width: 50px;
+}
+
+.instagram:hover, .facebook:hover, .whatsapp:hover {
+  fill: #9698a0; /* Substitua pelo valor desejado */
+}
+
+.relogio {
+  width: 50px;
+  fill: #4e4f52
+}
