@@ -51,6 +51,7 @@ export default function Login() {
     formData.append('password', password);
     try {
       const response = await axios.post('https://147.182.197.156:3001/login', formData);
+      console.log(response);
       if (response.status === 200) {
         const { token } = response.data;
         localStorage.setItem('token', token);
