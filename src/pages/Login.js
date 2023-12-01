@@ -24,11 +24,11 @@ export default function Login() {
     }
     const checkAuthentication = async () => {
       try {
-        await axios.get(`${localhost}/login/token`);
-        const teste = await axios.get(`${localhost}/companies`);
-        console.log(teste);
+        const tes = await axios.get('https://147.182.197.156:3001/login/token');
+        console.log(tes);
         history.push('/admin');
       } catch (error) {
+        console.log(error);
         return 0;
       }
     };
@@ -50,17 +50,16 @@ export default function Login() {
     formData.append('username', user);
     formData.append('password', password);
     try {
-      const response = await axios.post(`${localhost}/login`, formData);
+      const response = await axios.post('https://147.182.197.156:3001/login', formData);
       if (response.status === 200) {
         const { token } = response.data;
         localStorage.setItem('token', token);
         history.push('/admin');
       }
     } catch (error) {
+      console.log(error);
       setLoginValid(true);
     }
-    console.log(user);
-    console.log(password);
   };
 
   return (
@@ -77,7 +76,7 @@ export default function Login() {
             <LockOutlinedIcon />
           </Avatar>
           <Typography component="h1" variant="h6" className="mb-5">
-            Loginn
+            Login
           </Typography>
           <div
             className="pb-8"
