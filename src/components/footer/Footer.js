@@ -14,15 +14,17 @@ export default function Footer() {
         { whatsappIcon }
       </div>
       <div className="flex justify-center mt-4">
-        <Typography
-          variant="overline"
-          display="block"
-          gutterBottom
-          className="mx-2 teste"
-          style={ { color: '#9698a0' } }
-        >
-          Quem somos
-        </Typography>
+        <button>
+          <Typography
+            variant="overline"
+            display="block"
+            gutterBottom
+            className="mx-2 teste"
+            style={ { color: '#9698a0' } }
+          >
+            Quem somos
+          </Typography>
+        </button>
         <Typography
           variant="overline"
           display="block"
@@ -75,7 +77,7 @@ export default function Footer() {
         </div>
         { relogioIcon }
       </div>
-      <div>
+      <div className="flex justify-center items-center">
         <Typography
           variant="overline"
           display="block"
