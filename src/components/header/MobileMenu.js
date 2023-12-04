@@ -19,9 +19,28 @@ import { useHistory } from 'react-router-dom/cjs/react-router-dom.min';
 
 export default function MobileMenu() {
   const history = useHistory();
+  const pathLocal = history.location.pathname;
   const [state, setState] = React.useState({
     right: false,
   });
+
+  const scrollToSection = (sectionId) => {
+    const section = document.getElementById(sectionId);
+    const headerHeight = document.getElementById('inicio').offsetHeight; // ajuste 'inicio' para o ID correto do seu cabeçalho
+
+    if (section) {
+      const offset = headerHeight; // ajuste conforme necessário
+      const bodyRect = document.body.getBoundingClientRect().top;
+      const elementRect = section.getBoundingClientRect().top;
+      const elementPosition = elementRect - bodyRect;
+      const offsetPosition = elementPosition - offset;
+
+      window.scrollTo({
+        top: offsetPosition,
+        behavior: 'smooth',
+      });
+    }
+  };
 
   const mapMenu = [
     { name: 'Home',
@@ -29,16 +48,19 @@ export default function MobileMenu() {
       path: '/' },
     {
       name: 'Quem Somos',
+      nameId: 'quemsomos',
       icon: <BusinessIcon />,
       path: '/about',
     },
     {
       name: 'Serviços',
+      nameId: 'servicos',
       icon: <CellTowerOutlinedIcon />,
       path: '/services',
     },
     {
       name: 'Contato',
+      nameId: 'contato',
       icon: <ContactPhoneOutlinedIcon />,
       path: '/contact',
     },
@@ -68,7 +90,12 @@ export default function MobileMenu() {
           <ListItem
             key={ text.name }
             disablePadding
-            onClick={ () => { history.push(text.path); } }
+            onClick={ () => {
+              if (pathLocal === '/login') {
+                history.push('/');
+              }
+              scrollToSection(text.nameId);
+            } }
           >
             <ListItemButton>
               <ListItemIcon>

@@ -3,6 +3,8 @@ import Header from '../components/header/Header';
 import IntermedioHome from '../components/IntermedioHome/IntermedioHome';
 import Footer from '../components/footer/Footer';
 import IntermedioHomeTwo from '../components/IntermedioHome/IntermedioHomeTwo';
+import IntermedioHomeThree from '../components/IntermedioHome/IntermedioHomeThree';
+import Clientes from '../components/IntermedioHome/Clientes';
 
 export default function Home() {
   return (
@@ -11,6 +13,8 @@ export default function Home() {
       <div className="flex flex-col justify-center items-center">
         <IntermedioHome />
         <IntermedioHomeTwo />
+        <IntermedioHomeThree />
+        <Clientes />
       </div>
       <Footer />
     </div>

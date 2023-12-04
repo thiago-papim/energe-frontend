@@ -15,8 +15,9 @@ export default function IntermedioHome() {
   return (
     <ThemeProvider theme={ theme }>
       <section
+        id="home"
         className="flex flex-col justify-center items-center w-full lg:h-[600px]
-        h-[450px] mx-auto
+        h-[450px] mx-auto mt-20
           bg-[url('./imagens/torres.jpg')] bg-cover bg-center"
       >
         <p

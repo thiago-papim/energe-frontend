@@ -22,10 +22,11 @@ export default function IntermedioHomeTwo() {
   return (
     <ThemeProvider theme={ theme }>
       <section
-        className="flex flex-col justify-center items-center my-3"
+        className="flex flex-col justify-center items-center my-3 border-b-2 shadow-md pb-4"
+        id="quemsomos"
       >
         <p
-          className="text-2xl sm:text-3xl md:text-4xl lg:text-5xl font-custom text-center mb-4 border-b-2 border-black"
+          className="text-3xl sm:text-3xl md:text-4xl lg:text-5xl font-custom text-center mb-4 border-b-2 border-black"
         >
           QUEM SOMOS
         </p>

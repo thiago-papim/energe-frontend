@@ -1,3 +1,4 @@
+/* eslint-disable sonarjs/no-duplicate-string */
 import React from 'react';
 import { Typography } from '@mui/material';
 import { facebookIcon } from '../../imagens/iconSvg/facebookSvg';
@@ -6,15 +7,53 @@ import { instagramIcon } from '../../imagens/iconSvg/instagramSgv';
 import { relogioIcon } from '../../imagens/iconSvg/relogioSvg';
 
 export default function Footer() {
+  const scrollToSection = (sectionId) => {
+    const section = document.getElementById(sectionId);
+    const headerHeight = document.getElementById('inicio').offsetHeight; // ajuste 'inicio' para o ID correto do seu cabeçalho
+
+    if (section) {
+      const offset = headerHeight; // ajuste conforme necessário
+      const bodyRect = document.body.getBoundingClientRect().top;
+      const elementRect = section.getBoundingClientRect().top;
+      const elementPosition = elementRect - bodyRect;
+      const offsetPosition = elementPosition - offset;
+
+      window.scrollTo({
+        top: offsetPosition,
+        behavior: 'smooth',
+      });
+    }
+  };
+
   return (
     <div className="min-h-[200px] bg-[#000]">
       <div className="flex items-center justify-center pt-3">
-        { facebookIcon }
-        { instagramIcon }
-        { whatsappIcon }
+        <button
+          onClick={ () => {
+            window.open('https://www.facebook.com/people/Energe-Engenharia/100075901756053/');
+          } }
+        >
+          { facebookIcon }
+        </button>
+        <button
+          onClick={ () => {
+            window.open('https://www.instagram.com/energeengenharia/');
+          } }
+        >
+          { instagramIcon }
+        </button>
+        <button
+          onClick={ () => {
+            window.open('');
+          } }
+        >
+          { whatsappIcon }
+        </button>
       </div>
       <div className="flex justify-center mt-4">
-        <button>
+        <button
+          onClick={ () => scrollToSection('quemsomos') }
+        >
           <Typography
             variant="overline"
             display="block"
@@ -25,33 +64,45 @@ export default function Footer() {
             Quem somos
           </Typography>
         </button>
-        <Typography
-          variant="overline"
-          display="block"
-          gutterBottom
-          className="mx-2"
-          style={ { color: '#9698a0' } }
+        <button
+          onClick={ () => scrollToSection('servicos') }
         >
-          Serviços
-        </Typography>
-        <Typography
-          variant="overline"
-          display="block"
-          gutterBottom
-          className="mx-2"
-          style={ { color: '#9698a0' } }
+          <Typography
+            variant="overline"
+            display="block"
+            gutterBottom
+            className="mx-2"
+            style={ { color: '#9698a0' } }
+          >
+            Serviços
+          </Typography>
+        </button>
+        <button
+          onClick={ () => scrollToSection('contato') }
         >
-          Contato
-        </Typography>
-        <Typography
-          variant="overline"
-          display="block"
-          gutterBottom
-          className="mx-2"
-          style={ { color: '#9698a0' } }
+          <Typography
+            variant="overline"
+            display="block"
+            gutterBottom
+            className="mx-2"
+            style={ { color: '#9698a0' } }
+          >
+            Contato
+          </Typography>
+        </button>
+        <button
+          onClick={ () => scrollToSection('home') }
         >
-          Voltar ao início
-        </Typography>
+          <Typography
+            variant="overline"
+            display="block"
+            gutterBottom
+            className="mx-2"
+            style={ { color: '#9698a0' } }
+          >
+            Voltar ao início
+          </Typography>
+        </button>
       </div>
       <div
         className="flex

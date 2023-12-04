@@ -28,24 +28,49 @@ export default function Header() {
   const changeColor = (local) => {
     return pathLocal === local ? 'info' : 'btnColor';
   };
+
+  const scrollToSection = (sectionId) => {
+    const section = document.getElementById(sectionId);
+    const headerHeight = document.getElementById('inicio').offsetHeight; // ajuste 'inicio' para o ID correto do seu cabeçalho
+
+    if (section) {
+      const offset = headerHeight; // ajuste conforme necessário
+      const bodyRect = document.body.getBoundingClientRect().top;
+      const elementRect = section.getBoundingClientRect().top;
+      const elementPosition = elementRect - bodyRect;
+      const offsetPosition = elementPosition - offset;
+
+      window.scrollTo({
+        top: offsetPosition,
+        behavior: 'smooth',
+      });
+    }
+  };
   const mapMenu = [
-    { name: 'home', icon: <HomeIcon />, path: '/', color: changeColor('/') },
+    {
+      name: 'home',
+      nameId: 'home',
+      icon: <HomeIcon />,
+      path: '/',
+    },
     {
       name: 'quem somos',
       icon: <BusinessIcon />,
-      path: '/about',
+      nameId: 'quemsomos',
+      path: '/',
       color: changeColor('/about'),
     },
     {
       name: 'serviços',
       icon: <CellTowerOutlinedIcon />,
-      path: '/services',
+      nameId: 'servicos',
+      path: '/',
       color: changeColor('/services'),
     },
     {
       name: 'contato',
       icon: <ContactPhoneOutlinedIcon />,
-      path: '/contact',
+      path: '/',
       color: changeColor('/contact'),
     },
     {
@@ -58,8 +83,10 @@ export default function Header() {
   return (
     <ThemeProvider theme={ theme }>
       <header
+        id="inicio"
         className="flex justify-between items-center mx-auto
         border-b-2 shadow-md bg-[#fafafa]"
+        style={ { position: 'fixed', width: '100%', top: 0, zIndex: 1000 } }
       >
         <button
           className="flex"
@@ -90,7 +117,13 @@ export default function Header() {
                   <Button
                     className="border-t-8"
                     color={ e.color }
-                    onClick={ () => history.push(e.path) }
+                    onClick={ () => {
+                      if (e.path === '/login' || pathLocal === '/login') {
+                        history.push(e.path);
+                      } else {
+                        scrollToSection(e.nameId);
+                      }
+                    } }
                   >
                     {e.icon}
                     <p

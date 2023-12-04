@@ -2,13 +2,11 @@
 /* eslint-disable no-magic-numbers */
 import React, { useEffect, useState } from 'react';
 import { Alert, Avatar, Button, TextField, Typography } from '@mui/material';
-import PersonIcon from '@mui/icons-material/Person';
 import { useHistory } from 'react-router-dom';
 import LockOutlinedIcon from '@mui/icons-material/LockOutlined';
 
 import axios from 'axios';
 import Header from '../components/header/Header';
-import Footer from '../components/footer/Footer';
 
 export default function Login() {
   const history = useHistory();
@@ -24,7 +22,7 @@ export default function Login() {
     }
     const checkAuthentication = async () => {
       try {
-        const tes = await axios.get('http://147.182.197.156:3001/login/token');
+        const tes = await axios.get('https://147.182.197.156:3001/login/token');
         console.log(tes);
         history.push('/admin');
       } catch (error) {
@@ -50,7 +48,7 @@ export default function Login() {
     formData.append('username', user);
     formData.append('password', password);
     try {
-      const response = await axios.post('http://147.182.197.156:3001/login', formData);
+      const response = await axios.post('https://147.182.197.156:3001/login', formData);
       console.log(response);
       if (response.status === 200) {
         const { token } = response.data;
@@ -67,11 +65,11 @@ export default function Login() {
     <div className="App">
       <Header />
       <div
-        className="flex justify-center"
+        className="flex justify-center mt-32"
       >
         <div
           className="flex flex-col w-[400px] h-96
-        items-center justify-center my-16"
+        items-center justify-center mb-36"
         >
           <Avatar sx={ { m: 1, bgcolor: '' } }>
             <LockOutlinedIcon />
@@ -116,7 +114,6 @@ export default function Login() {
             : ''}
         </div>
       </div>
-      <Footer />
     </div>
   );
 }
