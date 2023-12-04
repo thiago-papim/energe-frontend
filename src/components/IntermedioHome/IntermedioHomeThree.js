@@ -43,7 +43,7 @@ export default function IntermedioHomeThree() {
     <ThemeProvider theme={ theme }>
       <section
         id="servicos"
-        className="flex flex-col my-3 items-center pt-4"
+        className="flex flex-col my-3 items-center py-6"
       >
         <p
           className="text-3xl sm:text-3xl md:text-4xl lg:text-5xl font-custom text-center mb-4 border-b-2 border-black"

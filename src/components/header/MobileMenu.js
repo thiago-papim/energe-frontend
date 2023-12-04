@@ -44,6 +44,7 @@ export default function MobileMenu() {
 
   const mapMenu = [
     { name: 'Home',
+      nameId: 'home',
       icon: <HomeIcon />,
       path: '/' },
     {
