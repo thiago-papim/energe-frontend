@@ -13,14 +13,13 @@ import { obterDataFormatada } from '../../../../services/datasEmissaoValidade';
 import { perguntas } from './PontosLaudo';
 
 export default async function gerarPdfLaudoInstalacao(laudo) {
-  console.log(laudo);
   const dataAtual = obterDataFormatada();
   const dataVencimento = obterDataFormatada(true);
   const { dpto, ac, resume, empresa, pontosLaudoInstalacao } = laudo;
   const imagemEmpresa = async () => {
     if (empresa.imageUrl) {
-      const imagemResponse = await getDirectImageURL(empresa.imageUrl);
-      return { image: imagemResponse, fit: [400, 300], alignment: 'center', colSpan: 6 };
+      const imageUri = await getDirectImageURL(empresa.imageUrl);
+      return { image: imageUri, fit: [400, 300], alignment: 'center', colSpan: 6 };
     }
     return '';
   };
@@ -57,6 +56,7 @@ export default async function gerarPdfLaudoInstalacao(laudo) {
     }];
 
   const mapPontos = await Promise.all(pontosLaudoInstalacao.map(async (ponto, i) => {
+    console.log('iniciando map');
     const respostaMaiuscula = (string) => {
       return string.charAt(0).toUpperCase() + string.slice(1);
     };
@@ -64,14 +64,12 @@ export default async function gerarPdfLaudoInstalacao(laudo) {
     const imagensUp = [];
 
     if (imagensPonto.length) {
+      console.log('testeeee');
       const processImage = async (url) => {
         const imageNow = await getDirectImageURL(url);
         imagensUp.push(imageNow);
       };
-
-      console.log('Aguardando');
       await Promise.all(imagensPonto.map((imagem) => processImage(imagem.url)));
-      console.log('Aguardando depois');
     }
 
     let imagensDataUri = [{ colSpan: 6, text: '' }, '', '', '', '', ''];
@@ -229,7 +227,9 @@ export default async function gerarPdfLaudoInstalacao(laudo) {
   const docDefinitions = {
     pageSize: 'A4',
     pageMargins: [15, 50, 15, 80],
-    content: [details, ...detailsTexts, ...mapPontos, paginaFinalUm, paginaFinalDois],
+    content: [details, ...detailsTexts,
+      ...mapPontos,
+      paginaFinalUm, paginaFinalDois],
     styles,
     footer() {
       return {

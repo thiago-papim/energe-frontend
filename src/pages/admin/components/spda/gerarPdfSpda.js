@@ -19,8 +19,8 @@ export default async function gerarPdfSpda(spda) {
   const { dpto, ac, resume, empresa, pontosSpda } = spda;
   const imagemEmpresa = async () => {
     if (empresa.imageUrl) {
-      const imagemResponse = await getDirectImageURL(empresa.imageUrl);
-      return { image: imagemResponse, fit: [400, 300], alignment: 'center', colSpan: 6 };
+      const imageUri = await getDirectImageURL(empresa.imageUrl);
+      return { image: imageUri, fit: [400, 300], alignment: 'center', colSpan: 6 };
     }
     return '';
   };
@@ -66,10 +66,7 @@ export default async function gerarPdfSpda(spda) {
         const imageNow = await getDirectImageURL(url);
         imagensUp.push(imageNow);
       };
-
-      console.log('Aguardando');
       await Promise.all(imagensPonto.map((imagem) => processImage(imagem.url)));
-      console.log('Aguardando depois');
     }
 
     let imagensDataUri = [{ colSpan: 6, text: '' }, '', '', '', '', ''];
@@ -190,7 +187,9 @@ export default async function gerarPdfSpda(spda) {
   const docDefinitions = {
     pageSize: 'A4',
     pageMargins: [15, 50, 15, 50],
-    content: [details, ...detailsTexts, ...mapPontos, conclusaoFinal],
+    content: [details, ...detailsTexts,
+      ...mapPontos,
+      conclusaoFinal],
     styles,
     footer() {
       return {

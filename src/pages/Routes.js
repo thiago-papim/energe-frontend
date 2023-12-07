@@ -21,7 +21,7 @@ function Routes() {
     <Switch>
       <Route exact path="/about" component={ About } />
       <Route exact path="/services" component={ Services } />
-      <Route exact path="/contact" component={ Contact } />
+      <Route exact path="/contato" component={ Contact } />
       <Route exact path="/login" component={ Login } />
       <Route exact path="/admin" component={ HomeAdmin } />
       <Route exact path="/review" component={ Review } />

@@ -34,8 +34,6 @@ export default function LaudoInstalacao() {
     setAc(laudoInstalacao.ac);
   }, [laudoInstalacao]);
 
-  console.log(laudoInstalacao);
-
   const handleAc = ({ target: { value } }) => {
     setAc(value.charAt(0).toUpperCase() + value.slice(1).toLowerCase());
     setLaudoInstalacao((prev) => {
@@ -77,7 +75,6 @@ export default function LaudoInstalacao() {
   };
 
   const finishPontoLaudo = async (laudoId) => {
-    const statusOk = 200;
     const responsePontos = await laudoInstalacao.pontos.map(async (ponto) => {
       const formData = new FormData();
       formData.append('laudoId', laudoId);
@@ -87,16 +84,13 @@ export default function LaudoInstalacao() {
       formData.append('risco', ponto.risco);
       if (ponto.imagens) {
         ponto.imagens.forEach((imagem) => {
-          formData.append('imagens', imagem[0]);
+          formData.append('image', imagem[0]);
         });
       }
       try {
-        const response = await axios.post(`${localhost}/laudo/ponto`, formData);
-        if (response.status === statusOk) {
-          console.log(response);
-        }
+        await axios.post(`${localhost}/laudo/ponto`, formData);
       } catch (error) {
-        console.log(error);
+        console.error(error);
       }
     });
     return Promise.all(responsePontos);
@@ -116,10 +110,9 @@ export default function LaudoInstalacao() {
       const response = await axios.post(`${localhost}/laudo`, formData);
       if (response.status === statusOk) {
         await finishPontoLaudo(response.data.id);
-        console.log(response);
       }
     } catch (error) {
-      console.log(error);
+      console.error(error);
     }
     setOpen(false);
     setLaudoInstalacao(laudoExample);

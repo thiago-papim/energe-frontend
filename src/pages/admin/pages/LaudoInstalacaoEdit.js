@@ -27,8 +27,6 @@ export default function LaudoInstalacaoEdit() {
   const localhost = process.env.REACT_APP_LOCAL_HOST;
   const history = useHistory();
 
-  console.log(laudoInstalacaoEdit);
-
   const validButton = !ac
   || !dpto || !laudoInstalacaoEdit.empresa.nome || !laudoInstalacao;
 
@@ -97,17 +95,16 @@ export default function LaudoInstalacaoEdit() {
         formData.append('risco', ponto.risco || 'Baixo');
         if (ponto.imagens) {
           ponto.imagens.forEach((imagem) => {
-            formData.append('imagens', imagem[0]);
+            formData.append('image', imagem[0]);
           });
         }
         try {
           const response = await axios.post(`${localhost}/laudo/ponto`, formData);
           if (response.status === statusOk) {
-            console.log(response);
             setOpen(false);
           }
         } catch (error) {
-          console.log(error);
+          console.error(error);
         }
       }
     });
@@ -127,26 +124,20 @@ export default function LaudoInstalacaoEdit() {
         formData.append('risco', ponto.risco);
         if (ponto.imagens) {
           ponto.imagens.forEach((imagem) => {
-            formData.append('imagens', imagem[0]);
+            formData.append('image', imagem[0]);
           });
         }
         try {
-          const response = await axios
+          await axios
             .put(`${localhost}/laudo/ponto/${pontoLaudoId}`, formData);
-          if (response.status === statusOk) {
-            console.log(response);
-          }
         } catch (error) {
-          console.log(error);
+          console.error(error);
         }
       }
     });
     const novosPontos = laudoInstalacaoEdit.pontos.filter((ponto) => ponto.novo === true);
     if (novosPontos.length) {
-      console.log('teeeem pontoss');
       await finishNewPontoLaudo(laudoId);
-    } else {
-      console.log('nao tem pontos');
     }
     await Promise.all(responsePontos);
     setOpen(false);
@@ -168,11 +159,10 @@ export default function LaudoInstalacaoEdit() {
       const response = await axios
         .put(`${localhost}/laudo/${laudoInstalacaoEdit.laudoInstalacaoId}`, formData);
       if (response.status === statusOk) {
-        console.log(response);
         await finishPontoLaudo(laudoInstalacaoEdit.laudoInstalacaoId);
       }
     } catch (error) {
-      console.log(error);
+      console.error(error);
     }
     setEmpresaSelecionada(empresa);
     history.push('admin');

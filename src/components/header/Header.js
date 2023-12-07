@@ -25,6 +25,7 @@ const theme = createTheme({
 export default function Header() {
   const history = useHistory();
   const pathLocal = history.location.pathname;
+  console.log(pathLocal);
   const changeColor = (local) => {
     return pathLocal === local ? 'info' : 'btnColor';
   };
@@ -46,6 +47,7 @@ export default function Header() {
       });
     }
   };
+
   const mapMenu = [
     {
       name: 'home',
@@ -70,7 +72,7 @@ export default function Header() {
     {
       name: 'contato',
       icon: <ContactPhoneOutlinedIcon />,
-      path: '/',
+      path: '/contato',
       color: changeColor('/contact'),
     },
     {
@@ -118,8 +120,11 @@ export default function Header() {
                     className="border-t-8"
                     color={ e.color }
                     onClick={ () => {
-                      if (e.path === '/login' || pathLocal === '/login') {
+                      if (e.path === '/login' || pathLocal === '/contato'
+                       || e.path === '/contato' || pathLocal === '/login') {
                         history.push(e.path);
+                      } else if (pathLocal.includes('empresas')) {
+                        history.push('/');
                       } else {
                         scrollToSection(e.nameId);
                       }

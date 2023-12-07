@@ -19,7 +19,7 @@ import { useHistory } from 'react-router-dom/cjs/react-router-dom.min';
 
 export default function MobileMenu() {
   const history = useHistory();
-  const pathLocal = history.location.pathname;
+  // const pathLocal = history.location.pathname;
   const [state, setState] = React.useState({
     right: false,
   });
@@ -63,7 +63,7 @@ export default function MobileMenu() {
       name: 'Contato',
       nameId: 'contato',
       icon: <ContactPhoneOutlinedIcon />,
-      path: '/contact',
+      path: '/contato',
     },
   ];
 
@@ -92,7 +92,9 @@ export default function MobileMenu() {
             key={ text.name }
             disablePadding
             onClick={ () => {
-              if (pathLocal === '/login') {
+              if (text.path === '/contato') {
+                history.push('/contato');
+              } else {
                 history.push('/');
               }
               scrollToSection(text.nameId);

@@ -1,13 +1,22 @@
 /* eslint-disable sonarjs/no-duplicate-string */
 import React from 'react';
 import { Typography } from '@mui/material';
+import { useHistory } from 'react-router-dom/cjs/react-router-dom.min';
 import { facebookIcon } from '../../imagens/iconSvg/facebookSvg';
 import { whatsappIcon } from '../../imagens/iconSvg/whatsappSvg';
 import { instagramIcon } from '../../imagens/iconSvg/instagramSgv';
 import { relogioIcon } from '../../imagens/iconSvg/relogioSvg';
 
 export default function Footer() {
+  const history = useHistory();
+  const pathLocal = history.location.pathname;
+
   const scrollToSection = (sectionId) => {
+    if (sectionId === '/contato') {
+      history.push('/contato');
+    } else if (pathLocal === '/contato') {
+      history.push('/');
+    }
     const section = document.getElementById(sectionId);
     const headerHeight = document.getElementById('inicio').offsetHeight; // ajuste 'inicio' para o ID correto do seu cabeçalho
 
@@ -78,7 +87,7 @@ export default function Footer() {
           </Typography>
         </button>
         <button
-          onClick={ () => scrollToSection('contato') }
+          onClick={ () => scrollToSection('/contato') }
         >
           <Typography
             variant="overline"

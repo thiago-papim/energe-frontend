@@ -94,7 +94,7 @@ export default function SpdaEdit() {
         formData.append('obs', ponto.obs);
         if (ponto.imagens) {
           ponto.imagens.forEach((imagem) => {
-            formData.append('imagens', imagem[0]);
+            formData.append('image', imagem[0]);
           });
         }
         try {
@@ -123,7 +123,7 @@ export default function SpdaEdit() {
         formData.append('obs', ponto.obs);
         if (ponto.imagens) {
           ponto.imagens.forEach((imagem) => {
-            formData.append('imagens', imagem[0]);
+            formData.append('image', imagem[0]);
           });
         }
         try {

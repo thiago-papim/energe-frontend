@@ -1,27 +1,25 @@
-/* eslint-disable max-len */
-
 import axios from 'axios';
 
-// Substitua 'YOUR_FILE_ID' e 'YOUR_API_KEY' pelos valores corretos
-const apiKey = 'AIzaSyCTYUu47Q2FTKeH1WEMym8U4snuRr7GY6o';
-
-export default async function getDirectImageURL(id) {
-  const apiUrl = `https://www.googleapis.com/drive/v3/files/${id}?alt=media&key=${apiKey}`;
+export default async function getDirectImageURL(s3Key) {
   try {
-    const response = await axios.get(apiUrl, {
-      responseType: 'arraybuffer',
-      headers: {
-        'Content-Type': 'image/*',
-      },
-    });
-
+    const s3Url = `https://energe.s3.amazonaws.com/${s3Key}`;
+    const response = await axios.get(s3Url, { responseType: 'arraybuffer' });
+    console.log(response);
+    if (!response.data || !response.data.byteLength) {
+      console.error('Dados da imagem ausentes na resposta.');
+      return null;
+    }
     const arrayBuffer = response.data;
-    const base64 = btoa(new Uint8Array(arrayBuffer).reduce((data, byte) => data + String.fromCharCode(byte), ''));
-    const directImageUrl = `data:image/*;base64,${base64}`;
+    const base64 = btoa(
+      new Uint8Array(arrayBuffer)
+        .reduce((data, byte) => data + String.fromCharCode(byte), ''),
+    );
 
-    return directImageUrl;
+    const dataURI = `data:image/jpeg;base64,${base64}`;
+
+    return dataURI;
   } catch (error) {
-    console.error('Erro ao obter URL direta da imagem:', error);
+    console.error('Erro ao obter imagem do S3:', error);
     return null;
   }
 }

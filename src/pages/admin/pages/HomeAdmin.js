@@ -7,6 +7,7 @@ import axios from 'axios';
 import HeaderAdmin from '../components/HeaderAdmin';
 import { empresa, laudoExample, spdaExample } from '../examples/exemplos';
 import AppContext from '../../../context/AppContext';
+import getDirectImageURL from '../../../services/pdfImage';
 
 export default function HomeAdmin() {
   const history = useHistory();
@@ -15,12 +16,12 @@ export default function HomeAdmin() {
 
   useEffect(() => {
     const token = localStorage.getItem('token');
-    console.log(token);
     axios.defaults.headers.common.Authorization = token;
     const checkAuthentication = async () => {
       try {
         await axios.get(`${localhost}/login/token`);
       } catch (error) {
+        console.log(error);
         history.push('/login');
       }
     };

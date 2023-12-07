@@ -100,7 +100,6 @@ export default function PontosSpda({ disabledButton, pontos }) {
     setFormularios(novosFormularios);
     if (formularios[index].id) {
       setSpdaDelete([...spdaDelete, formularios[index].id]);
-      console.log(formularios[index].id);
     }
   };
 
@@ -178,7 +177,7 @@ export default function PontosSpda({ disabledButton, pontos }) {
                   { formulario.imagensUrl.map((e, i) => (
                     <img
                       key={ i }
-                      src={ e.url ? `https://drive.google.com/uc?id=${e.url}` : e.imageUrl }
+                      src={ e.url ? `https://energe.s3.amazonaws.com/${e.url}` : e.imageUrl }
                       alt={ `Imagem ${i}` }
                       className="w-[150px] h-[150px] mx-2"
                     />
@@ -229,7 +228,7 @@ export default function PontosSpda({ disabledButton, pontos }) {
                       key={ i }
                     >
                       <img
-                        src={ e.url ? `https://drive.google.com/uc?id=${e.url}` : e.imageUrl }
+                        src={ e.url ? `https://energe.s3.amazonaws.com/${e.url}` : e.imageUrl }
                         alt={ `Imagem ${i}` }
                         className="w-[150px] h-[150px] mx-2"
                       />

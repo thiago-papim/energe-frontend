@@ -32,6 +32,8 @@ export default function Spda() {
     setAc(spda.ac);
   }, [spda]);
 
+  console.log(spda);
+
   const handleAc = ({ target: { value } }) => {
     setAc(value.charAt(0).toUpperCase() + value.slice(1).toLowerCase());
     setSpda((prev) => {
@@ -82,7 +84,7 @@ export default function Spda() {
       formData.append('obs', ponto.obs);
       if (ponto.imagens) {
         ponto.imagens.forEach((imagem) => {
-          formData.append('imagens', imagem[0]);
+          formData.append('image', imagem[0]);
         });
       }
       try {

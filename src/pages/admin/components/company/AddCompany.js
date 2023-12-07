@@ -25,7 +25,7 @@ export default function AddCompany() {
     setDisableSend(true);
     setOpen(true);
     const formData = new FormData();
-    formData.append('imagem', imagemup ? imagemup[0] : null);
+    formData.append('image', imagemup ? imagemup[0] : null);
     formData.append('nome', name);
     formData.append('rua', enderecoCompleto.logradouro);
     formData.append('numero', numero);
