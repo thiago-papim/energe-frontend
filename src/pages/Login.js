@@ -32,6 +32,16 @@ export default function Login() {
         return 0;
       }
     };
+    const testeApi = async () => {
+      try {
+        const teste = await axios.get('http://energeengenharia.com:3001');
+        console.log(teste);
+      } catch (error) {
+        console.log(error);
+        return 0;
+      }
+    };
+    testeApi();
     checkAuthentication();
   }, [history, localhost]);
 
