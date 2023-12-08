@@ -15,8 +15,6 @@ export default function Login() {
   const [loginValid, setLoginValid] = useState(false);
   const localhost = process.env.REACT_APP_LOCAL_HOST;
 
-  console.log(localhost);
-
   useEffect(() => {
     const token = localStorage.getItem('token');
     if (token) {

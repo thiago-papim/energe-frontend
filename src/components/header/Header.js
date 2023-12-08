@@ -25,7 +25,6 @@ const theme = createTheme({
 export default function Header() {
   const history = useHistory();
   const pathLocal = history.location.pathname;
-  console.log(pathLocal);
   const changeColor = (local) => {
     return pathLocal === local ? 'info' : 'btnColor';
   };
