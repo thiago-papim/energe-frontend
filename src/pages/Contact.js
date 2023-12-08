@@ -16,7 +16,6 @@ export default function Contact() {
   const onGenericChange = (e) => {
     const { target: { value, name } } = e;
     setInfo({ ...info, [name]: value });
-    console.log(info);
   };
 
   const enviar = async () => {

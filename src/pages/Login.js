@@ -1,7 +1,8 @@
 /* eslint-disable no-unused-vars */
 /* eslint-disable no-magic-numbers */
 import React, { useEffect, useState } from 'react';
-import { Alert, Avatar, Button, TextField, Typography } from '@mui/material';
+import { Alert, Avatar, Backdrop,
+  Button, CircularProgress, TextField, Typography } from '@mui/material';
 import { useHistory } from 'react-router-dom';
 import LockOutlinedIcon from '@mui/icons-material/LockOutlined';
 
@@ -11,6 +12,7 @@ import Header from '../components/header/Header';
 export default function Login() {
   const history = useHistory();
   const [password, setPassword] = useState('');
+  const [loading, setLoading] = useState(true);
   const [user, setUser] = useState('');
   const [loginValid, setLoginValid] = useState(false);
   const localhost = process.env.REACT_APP_LOCAL_HOST;
@@ -22,24 +24,13 @@ export default function Login() {
     }
     const checkAuthentication = async () => {
       try {
-        const tes = await axios.get(`${localhost}/login/token`);
-        console.log(tes);
+        await axios.get(`${localhost}/login/token`);
         history.push('/admin');
       } catch (error) {
-        console.log(error);
+        setLoading(false);
         return 0;
       }
     };
-    const testeApi = async () => {
-      try {
-        const teste = await axios.get('https://energeengenharia.com:3002/');
-        console.log(teste);
-      } catch (error) {
-        console.log(error);
-        return 0;
-      }
-    };
-    testeApi();
     checkAuthentication();
   }, [history, localhost]);
 
@@ -54,6 +45,7 @@ export default function Login() {
   };
 
   const btnLogin = async () => {
+    setLoading(true);
     const formData = new FormData();
     formData.append('username', user);
     formData.append('password', password);
@@ -73,6 +65,12 @@ export default function Login() {
 
   return (
     <div className="App">
+      <Backdrop
+        sx={ { color: '#fff', zIndex: (theme) => theme.zIndex.drawer + 1 } }
+        open={ loading }
+      >
+        <CircularProgress color="inherit" />
+      </Backdrop>
       <Header />
       <div
         className="flex justify-center mt-32"

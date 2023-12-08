@@ -1,6 +1,6 @@
 /* eslint-disable sonarjs/no-duplicate-string */
 import React from 'react';
-import { Typography } from '@mui/material';
+import { Divider, Typography } from '@mui/material';
 import { useHistory } from 'react-router-dom';
 import { facebookIcon } from '../../imagens/iconSvg/facebookSvg';
 import { whatsappIcon } from '../../imagens/iconSvg/whatsappSvg';
@@ -63,59 +63,48 @@ export default function Footer() {
         <button
           onClick={ () => scrollToSection('quemsomos') }
         >
-          <Typography
-            variant="overline"
-            display="block"
-            gutterBottom
-            className="mx-2 transition duration-300 hover:scale-105"
-            style={ { color: '#9698a0' } }
+          <p
+            className="text-sm md:text-xl text-center mb-4 text-[#9698a0]
+            mx-2 transition duration-300 hover:scale-105"
           >
-            Quem somos
-          </Typography>
+            QUEM SOMOS
+          </p>
         </button>
         <button
           onClick={ () => scrollToSection('servicos') }
         >
-          <Typography
-            variant="overline"
-            display="block"
-            gutterBottom
-            className="mx-2 transition duration-300 hover:scale-105"
-            style={ { color: '#9698a0' } }
+          <p
+            className="text-sm md:text-xl text-center mb-4 text-[#9698a0]
+            mx-2 transition duration-300 hover:scale-105"
           >
-            Serviços
-          </Typography>
+            SERVIÇOS
+          </p>
         </button>
         <button
           onClick={ () => scrollToSection('/contato') }
         >
-          <Typography
-            variant="overline"
-            display="block"
-            gutterBottom
-            className="mx-2 transition duration-300 hover:scale-105"
-            style={ { color: '#9698a0' } }
+          <p
+            className="text-sm md:text-xl text-center mb-4 text-[#9698a0]
+            mx-2 transition duration-300 hover:scale-105"
           >
-            Contato
-          </Typography>
+            CONTATO
+          </p>
         </button>
         <button
           onClick={ () => scrollToSection('home') }
         >
-          <Typography
-            variant="overline"
-            display="block"
-            gutterBottom
-            className="mx-2 transition duration-300 hover:scale-105"
-            style={ { color: '#9698a0' } }
+          <p
+            className="text-sm md:text-xl text-center mb-4 text-[#9698a0]
+            mx-2 transition duration-300 hover:scale-105"
           >
-            Voltar ao início
-          </Typography>
+            VOLTAR AO INÍCIO
+          </p>
         </button>
       </div>
+      <Divider className="bg-white" light />
       <div
         className="flex
-      items-start justify-center border-y-2 p-3 border-[#9698a0]"
+      items-start justify-center p-3"
       >
         <div className="flex flex-col mr-4">
           <Typography
@@ -134,7 +123,9 @@ export default function Footer() {
           >
             De Segunda a Sexta das 08:00 ás 17:00
           </Typography>
-          <div className="flex justify-between">
+          <div
+            className="flex-col sm:flex-row flex justify-between"
+          >
             <Typography
               variant="subtitle2"
               gutterBottom
@@ -146,7 +137,7 @@ export default function Footer() {
             <Typography
               variant="subtitle2"
               gutterBottom
-              className="text-center border-r-2 border-[#9698a0]"
+              className="text-center"
               style={ { color: '#9698a0' } }
             />
             <Typography
@@ -159,7 +150,13 @@ export default function Footer() {
             </Typography>
           </div>
         </div>
-        <div className="flex flex-col justify-start mr-4">
+        <Divider
+          orientation="vertical"
+          variant="middle"
+          className="bg-white m-2"
+          flexItem
+        />
+        <div className="flex flex-col justify-center items-center mr-4">
           <Typography
             variant="title"
             gutterBottom
@@ -176,9 +173,10 @@ export default function Footer() {
           >
             (11) 9.8407-0434
           </Typography>
+          { relogioIcon }
         </div>
-        { relogioIcon }
       </div>
+      <Divider className="bg-white" light />
       <div className="flex justify-center items-center">
         <Typography
           variant="overline"

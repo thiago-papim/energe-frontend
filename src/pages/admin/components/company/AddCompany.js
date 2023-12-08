@@ -65,6 +65,7 @@ export default function AddCompany() {
       setEnderecoCompĺeto(null);
     }
     if (event.target.value.length === 8) {
+      setOpen(true);
       const cep2 = event.target.value;
       const url = `https://viacep.com.br/ws/${cep2}/json/`;
 
@@ -73,8 +74,10 @@ export default function AddCompany() {
         if (response.ok) {
           const endereco = await response.json();
           setEnderecoCompĺeto(endereco);
+          setOpen(false);
         } else {
           console.error('Erro ao buscar o endereço');
+          setOpen(false);
         }
       } catch (error) {
         console.error(`Erro na solicitação: ${error}`);
@@ -169,6 +172,12 @@ export default function AddCompany() {
             } }
             disabled={ disableSend }
           />
+          <Backdrop
+            sx={ { color: '#fff', zIndex: (theme) => theme.zIndex.drawer + 1 } }
+            open={ open }
+          >
+            <CircularProgress color="inherit" />
+          </Backdrop>
           {enderecoCompleto && enderecoCompleto.erro ? (
             <Alert severity="warning">CEP inválido!</Alert>
           ) : ''}

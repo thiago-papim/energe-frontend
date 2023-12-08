@@ -14,6 +14,7 @@ export default function DeleteCompany() {
   const localhost = process.env.REACT_APP_LOCAL_HOST;
 
   useEffect(() => {
+    setOpen(true);
     const fetchData = async () => {
       try {
         const response = await axios.get(`${localhost}/companies`);
@@ -23,8 +24,8 @@ export default function DeleteCompany() {
         setErro('Ocorreu um erro ao buscar as empresa.');
       }
     };
-
     fetchData();
+    setOpen(false);
   }, [uploadEmpresas, localhost]);
 
   const deleteCompany = async () => {

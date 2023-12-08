@@ -11,12 +11,6 @@ export default function IntermedioHomeTwo() {
         main: '#8792ad',
       },
     },
-    typography: {
-      fontSize: '1.2rem',
-      '@media (min-width:600px)': {
-        fontSize: '1.5rem',
-      },
-    },
   });
 
   return (

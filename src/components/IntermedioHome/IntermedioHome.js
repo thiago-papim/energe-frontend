@@ -1,9 +1,25 @@
 import React from 'react';
-import { useHistory } from 'react-router-dom';
 
 import { Button, ThemeProvider, createTheme } from '@mui/material';
 
 export default function IntermedioHome() {
+  const scrollToSection = () => {
+    const section = document.getElementById('quemsomos');
+    const headerHeight = document.getElementById('inicio').offsetHeight;
+
+    if (section) {
+      const offset = headerHeight;
+      const bodyRect = document.body.getBoundingClientRect().top;
+      const elementRect = section.getBoundingClientRect().top;
+      const elementPosition = elementRect - bodyRect;
+      const offsetPosition = elementPosition - offset;
+
+      window.scrollTo({
+        top: offsetPosition,
+        behavior: 'smooth',
+      });
+    }
+  };
   const theme = createTheme({
     palette: {
       btnColor: {
@@ -11,7 +27,6 @@ export default function IntermedioHome() {
       },
     },
   });
-  const history = useHistory();
   return (
     <ThemeProvider theme={ theme }>
       <section
@@ -32,7 +47,7 @@ export default function IntermedioHome() {
           Comprometidos com Responsabilidade, Qualidade e Satisfação Garantida
         </p>
         <Button
-          onClick={ () => history.push('/about') }
+          onClick={ () => scrollToSection() }
           variant="contained"
           size="medium"
           className="w-[150px] h-[40px]"

@@ -1,8 +1,6 @@
 import React from 'react';
 import { Switch, Route } from 'react-router-dom';
 import Home from './Home';
-import About from './About';
-import Services from './Services';
 import Contact from './Contact';
 import Login from './Login';
 import HomeAdmin from './admin/pages/HomeAdmin';
@@ -19,8 +17,6 @@ import NotFound from './admin/pages/NotFound';
 function Routes() {
   return (
     <Switch>
-      <Route exact path="/about" component={ About } />
-      <Route exact path="/services" component={ Services } />
       <Route exact path="/contato" component={ Contact } />
       <Route exact path="/login" component={ Login } />
       <Route exact path="/admin" component={ HomeAdmin } />
