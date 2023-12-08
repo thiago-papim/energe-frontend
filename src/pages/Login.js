@@ -34,7 +34,7 @@ export default function Login() {
     };
     const testeApi = async () => {
       try {
-        const teste = await axios.get('http://energeengenharia.com:3001');
+        const teste = await axios.get('https://energeengenharia.com:3002/');
         console.log(teste);
       } catch (error) {
         console.log(error);
