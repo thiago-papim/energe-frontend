@@ -1,7 +1,7 @@
 /* eslint-disable sonarjs/no-duplicate-string */
 import React from 'react';
 import { Typography } from '@mui/material';
-import { useHistory } from 'react-router-dom/cjs/react-router-dom.min';
+import { useHistory } from 'react-router-dom';
 import { facebookIcon } from '../../imagens/iconSvg/facebookSvg';
 import { whatsappIcon } from '../../imagens/iconSvg/whatsappSvg';
 import { instagramIcon } from '../../imagens/iconSvg/instagramSgv';
@@ -18,10 +18,10 @@ export default function Footer() {
       history.push('/');
     }
     const section = document.getElementById(sectionId);
-    const headerHeight = document.getElementById('inicio').offsetHeight; // ajuste 'inicio' para o ID correto do seu cabeçalho
+    const headerHeight = document.getElementById('inicio').offsetHeight;
 
     if (section) {
-      const offset = headerHeight; // ajuste conforme necessário
+      const offset = headerHeight;
       const bodyRect = document.body.getBoundingClientRect().top;
       const elementRect = section.getBoundingClientRect().top;
       const elementPosition = elementRect - bodyRect;
@@ -52,9 +52,9 @@ export default function Footer() {
           { instagramIcon }
         </button>
         <button
-          onClick={ () => {
-            window.open('');
-          } }
+          onClick={ () => window.open(
+            'https://api.whatsapp.com/send?phone=5511975250813&text=Ola',
+          ) }
         >
           { whatsappIcon }
         </button>
@@ -67,7 +67,7 @@ export default function Footer() {
             variant="overline"
             display="block"
             gutterBottom
-            className="mx-2 teste"
+            className="mx-2 transition duration-300 hover:scale-105"
             style={ { color: '#9698a0' } }
           >
             Quem somos
@@ -80,7 +80,7 @@ export default function Footer() {
             variant="overline"
             display="block"
             gutterBottom
-            className="mx-2"
+            className="mx-2 transition duration-300 hover:scale-105"
             style={ { color: '#9698a0' } }
           >
             Serviços
@@ -93,7 +93,7 @@ export default function Footer() {
             variant="overline"
             display="block"
             gutterBottom
-            className="mx-2"
+            className="mx-2 transition duration-300 hover:scale-105"
             style={ { color: '#9698a0' } }
           >
             Contato
@@ -106,7 +106,7 @@ export default function Footer() {
             variant="overline"
             display="block"
             gutterBottom
-            className="mx-2"
+            className="mx-2 transition duration-300 hover:scale-105"
             style={ { color: '#9698a0' } }
           >
             Voltar ao início
@@ -115,11 +115,53 @@ export default function Footer() {
       </div>
       <div
         className="flex
-      items-center justify-center border-y-2 p-3 border-[#9698a0]"
+      items-start justify-center border-y-2 p-3 border-[#9698a0]"
       >
         <div className="flex flex-col mr-4">
           <Typography
+            variant="title"
+            gutterBottom
+            className="text-center"
+            style={ { color: '#9698a0' } }
+          >
+            Fale Conosco
+          </Typography>
+          <Typography
             variant="subtitle2"
+            gutterBottom
+            className="text-center"
+            style={ { color: '#9698a0' } }
+          >
+            De Segunda a Sexta das 08:00 ás 17:00
+          </Typography>
+          <div className="flex justify-between">
+            <Typography
+              variant="subtitle2"
+              gutterBottom
+              className="text-center"
+              style={ { color: '#9698a0' } }
+            >
+              (11) 4361-1703
+            </Typography>
+            <Typography
+              variant="subtitle2"
+              gutterBottom
+              className="text-center border-r-2 border-[#9698a0]"
+              style={ { color: '#9698a0' } }
+            />
+            <Typography
+              variant="subtitle2"
+              gutterBottom
+              className="text-center"
+              style={ { color: '#9698a0' } }
+            >
+              (11) 4173-1464
+            </Typography>
+          </div>
+        </div>
+        <div className="flex flex-col justify-start mr-4">
+          <Typography
+            variant="title"
             gutterBottom
             className="text-center"
             style={ { color: '#9698a0' } }

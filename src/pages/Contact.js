@@ -42,9 +42,9 @@ export default function Contact() {
     }
   };
   return (
-    <div className="App">
-      <Header />
+    <div className="App flex flex-col h-screen justify-between">
       <div className="mt-36 mb-10 flex flex-col items-center">
+        <Header />
         <p>
           Contato
         </p>
@@ -87,8 +87,7 @@ export default function Contact() {
             onChange={ onGenericChange }
             value={ info.mensagem }
             name="mensagem"
-            className="border-2 w-[90%] lg:w-[70%]"
-            aria-label="minimum height"
+            className="border-2 w-[70%] lg:w-[50%]"
             minRows={ 3 }
             placeholder="Digite aqui"
           />
@@ -104,7 +103,9 @@ export default function Contact() {
           </Button>
         </div>
       </div>
-      <Footer />
+      <div className="bg-black">
+        <Footer />
+      </div>
     </div>
   );
 }

@@ -5,6 +5,7 @@ import Footer from '../components/footer/Footer';
 import IntermedioHomeTwo from '../components/IntermedioHome/IntermedioHomeTwo';
 import IntermedioHomeThree from '../components/IntermedioHome/IntermedioHomeThree';
 import Clientes from '../components/IntermedioHome/Clientes';
+import BtnWhatspp from '../components/BtnWhatsapp';
 
 export default function Home() {
   return (
@@ -17,6 +18,7 @@ export default function Home() {
         <Clientes />
       </div>
       <Footer />
+      <BtnWhatspp />
     </div>
   );
 }
