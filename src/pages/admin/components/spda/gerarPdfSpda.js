@@ -18,10 +18,10 @@ export default async function gerarPdfSpda(spda) {
   const dataVencimento = obterDataFormatada(true);
   const { dpto, ac, resume, empresa, pontosSpda } = spda;
   const imagemEmpresa = async () => {
-    if (empresa.imageUrl) {
-      const imageUri = await getDirectImageURL(empresa.imageUrl);
-      return { image: imageUri, fit: [400, 300], alignment: 'center', colSpan: 6 };
-    }
+    // if (empresa.imageUrl) {
+    //   const imageUri = await getDirectImageURL(empresa.imageUrl);
+    //   return { image: imageUri, fit: [400, 300], alignment: 'center', colSpan: 6 };
+    // }
     return '';
   };
   const cnpjFomated = empresa.cnpj.replace(/\D/g, '');
@@ -44,7 +44,7 @@ export default async function gerarPdfSpda(spda) {
           [{ colSpan: 2, text: 'Endereço:', bold: true, color: 'red' }, '', { colSpan: 4, bold: true, text: endereco }, '', '', ''],
           [{ colSpan: 2, text: 'Cidade:', bold: true, color: 'red' }, '', { colSpan: 2, text: `${empresa.cidade}.`, bold: true }, '', { text: 'Estado', bold: true, color: 'red' }, { text: `${empresa.estado}.`, bold: true }],
           [{ colSpan: 2, text: 'A/C. Sr(a):', bold: true, color: 'red' }, '', { text: `${ac}.`, bold: true }, { text: 'Departamento:', bold: true, color: 'red' }, { colSpan: 2, text: `${dpto}.`, bold: true }],
-          [{ text: textInitial, colSpan: 4, margin: [0, 15], bold: true, color: 'red' }, '', '', '', { colSpan: 2, qr: `http://localhost:3000/${cnpjFomated}`, fit: '120', alignment: 'center' }, ''],
+          [{ text: textInitial, colSpan: 4, margin: [0, 15], bold: true, color: 'red' }, '', '', '', { colSpan: 2, qr: `https://energe-frontend-git-main-energeengenharia.vercel.app/empresas/${cnpjFomated}`, fit: '120', alignment: 'center' }, ''],
           [await imagemEmpresa(), '', '', '', '', ''],
           [{ text: 'Emissão:', colSpan: 2, bold: true, color: 'red' }, '', { text: dataAtual, bold: true }, { text: 'Validade:', colSpan: 2, bold: true, color: 'red' }, '', { text: dataVencimento, bold: true }],
           [{ text: 'Responsável Técnico:', colSpan: 2, bold: true, color: 'red' }, '', { text: 'Valdir Amaro de Paula', bold: true }, { text: 'CREA-SP:', colSpan: 2, bold: true, color: 'red' }, '', { text: '5062453248', bold: true }],
