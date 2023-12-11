@@ -247,7 +247,7 @@ export default function SpdaEdit() {
         />
         <div className="flex justify-center w-[450px]">
           <FormControl
-            className="rounded-xl w-full border-2 p-2"
+            className="rounded-xl w-full flex justify-center items-center border-2 p-2"
           >
             <FormLabel>Conclusão</FormLabel>
             <TextareaAutosize
