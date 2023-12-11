@@ -2,7 +2,7 @@ import axios from 'axios';
 
 export default async function getDirectImageURL(s3Key) {
   try {
-    const response = await axios.get(`https://energeengenharia.com/aws?awsUrl=${s3Key}`);
+    const response = await axios.post('https://energeengenharia.com:3002/aws', { awsUrl: s3Key });
     return response.data;
   } catch (error) {
     console.log('errrroooooo');
