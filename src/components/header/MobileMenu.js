@@ -6,6 +6,7 @@ import BusinessIcon from '@mui/icons-material/Business';
 import ContactPhoneOutlinedIcon from '@mui/icons-material/ContactPhoneOutlined';
 import CellTowerOutlinedIcon from '@mui/icons-material/CellTowerOutlined';
 import LoginOutlinedIcon from '@mui/icons-material/LoginOutlined';
+import GroupsIcon from '@mui/icons-material/Groups';
 import Box from '@mui/material/Box';
 import SwipeableDrawer from '@mui/material/SwipeableDrawer';
 import Button from '@mui/material/Button';
@@ -65,6 +66,12 @@ export default function MobileMenu() {
       icon: <ContactPhoneOutlinedIcon />,
       path: '/contato',
     },
+    {
+      name: 'Clientes',
+      nameId: 'clientes',
+      icon: <GroupsIcon />,
+      path: '/clientes',
+    },
   ];
 
   const toggleDrawer = (anchor, open) => (event) => {
@@ -94,6 +101,8 @@ export default function MobileMenu() {
             onClick={ () => {
               if (text.path === '/contato') {
                 history.push('/contato');
+              } else if (text.path === '/clientes') {
+                history.push('/clientes');
               } else {
                 history.push('/');
               }

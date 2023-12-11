@@ -1,6 +1,6 @@
 /* eslint-disable no-unused-vars */
 /* eslint-disable no-magic-numbers */
-import React, { useEffect, useState } from 'react';
+import React, { useContext, useEffect, useState } from 'react';
 import { Alert, Avatar, Backdrop,
   Button, CircularProgress, TextField, Typography } from '@mui/material';
 import { useHistory } from 'react-router-dom';
@@ -8,9 +8,12 @@ import LockOutlinedIcon from '@mui/icons-material/LockOutlined';
 
 import axios from 'axios';
 import Header from '../components/header/Header';
+import AppContext from '../context/AppContext';
+import { empresa } from './admin/examples/exemplos';
 
 export default function Login() {
   const history = useHistory();
+  const { setEmpresaSelecionada } = useContext(AppContext);
   const [password, setPassword] = useState('');
   const [loading, setLoading] = useState(true);
   const [user, setUser] = useState('');
@@ -33,6 +36,10 @@ export default function Login() {
     };
     checkAuthentication();
   }, [history, localhost]);
+
+  useEffect(() => {
+    setEmpresaSelecionada(empresa);
+  }, [setEmpresaSelecionada]);
 
   const inputPasswordChange = ({ target: { value } }) => {
     setPassword(value);

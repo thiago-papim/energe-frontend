@@ -1,18 +1,26 @@
 /* eslint-disable no-alert */
 /* eslint-disable no-magic-numbers */
-import React, { useState } from 'react';
+import React, { useContext, useEffect, useState } from 'react';
 import { Button, TextField, TextareaAutosize } from '@mui/material';
 import emailjs from '@emailjs/browser';
 import Header from '../components/header/Header';
 import Footer from '../components/footer/Footer';
+import AppContext from '../context/AppContext';
+import { empresa } from './admin/examples/exemplos';
 
 export default function Contact() {
+  const { setEmpresaSelecionada } = useContext(AppContext);
   const [info, setInfo] = useState({
     nome: '',
     email: '',
     telefone: '',
     mensagem: '',
   });
+
+  useEffect(() => {
+    setEmpresaSelecionada(empresa);
+  }, [setEmpresaSelecionada]);
+
   const onGenericChange = (e) => {
     const { target: { value, name } } = e;
     setInfo({ ...info, [name]: value });

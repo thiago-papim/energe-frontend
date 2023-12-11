@@ -13,6 +13,7 @@ import LaudoInstalacaoEdit from './admin/pages/LaudoInstalacaoEdit';
 import SendFile from './admin/pages/sendFile';
 import QrClientes from './admin/pages/QrClientes';
 import NotFound from './admin/pages/NotFound';
+import Clientes from './Clientes';
 
 function Routes() {
   return (
@@ -28,7 +29,8 @@ function Routes() {
       <Route exact path="/laudo-edit" component={ LaudoInstalacaoEdit } />
       <Route exact path="/empresas" component={ Empresas } />
       <Route exact path="/send" component={ SendFile } />
-      <Route exact path="/empresas/:cnpj" component={ QrClientes } />
+      <Route exact path="/clientes/:cnpj" component={ QrClientes } />
+      <Route exact path="/clientes" component={ Clientes } />
       <Route exact path="/" component={ Home } />
       <Route path="*" component={ NotFound } />
     </Switch>

@@ -7,6 +7,7 @@ import BusinessIcon from '@mui/icons-material/Business';
 import ContactPhoneOutlinedIcon from '@mui/icons-material/ContactPhoneOutlined';
 import CellTowerOutlinedIcon from '@mui/icons-material/CellTowerOutlined';
 import LoginOutlinedIcon from '@mui/icons-material/LoginOutlined';
+import GroupsIcon from '@mui/icons-material/Groups';
 import { blue, lime, red } from '@mui/material/colors';
 import logo from '../../imagens/logo-novo.png';
 import MobileMenu from './MobileMenu';
@@ -72,7 +73,13 @@ export default function Header() {
       name: 'contato',
       icon: <ContactPhoneOutlinedIcon />,
       path: '/contato',
-      color: changeColor('/contact'),
+      color: changeColor('/contato'),
+    },
+    {
+      name: 'clientes',
+      icon: <GroupsIcon />,
+      path: '/clientes',
+      color: changeColor('/clientes'),
     },
     {
       name: 'login',
@@ -120,7 +127,8 @@ export default function Header() {
                     color={ e.color }
                     onClick={ () => {
                       if (e.path === '/login' || pathLocal === '/contato'
-                       || e.path === '/contato' || pathLocal === '/login') {
+                       || e.path === '/contato' || pathLocal === '/login'
+                       || e.path === '/clientes' || pathLocal === '/clientes') {
                         history.push(e.path);
                       } else if (pathLocal.includes('empresas')) {
                         history.push('/');
