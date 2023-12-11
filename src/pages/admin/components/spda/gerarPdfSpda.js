@@ -18,10 +18,10 @@ export default async function gerarPdfSpda(spda) {
   const dataVencimento = obterDataFormatada(true);
   const { dpto, ac, resume, empresa, pontosSpda } = spda;
   const imagemEmpresa = async () => {
-    // if (empresa.imageUrl) {
-    //   const imageUri = await getDirectImageURL(empresa.imageUrl);
-    //   return { image: imageUri, fit: [400, 300], alignment: 'center', colSpan: 6 };
-    // }
+    if (empresa.imageUrl) {
+      const imageUri = await getDirectImageURL(empresa.imageUrl);
+      return { image: imageUri, fit: [400, 300], alignment: 'center', colSpan: 6 };
+    }
     return '';
   };
   const cnpjFomated = empresa.cnpj.replace(/\D/g, '');
