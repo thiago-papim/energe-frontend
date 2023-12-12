@@ -157,7 +157,7 @@ export default async function gerarPdfSpda(spda) {
         table: {
           widths: ['*', '*', '*', '*', '*', '*'],
           body: [
-            [{ colSpan: 6, text: 'Diagnóstico:', margin: [0, 5, 0, 0], bold: true, lineHeight: 2, color: 'red', border: [1, 0, 1, 0] }, '', '', '', '', ''],
+            [{ colSpan: 6, text: 'Diagnóstico:', margin: [0, 5, 0, 0], bold: true, lineHeight: 1, color: 'red', border: [1, 0, 1, 0] }, '', '', '', '', ''],
             [{ colSpan: 6, text: `${ponto.obs}`, bold: true, lineHeight: 4, border: [1, 0, 1, 1], color: 'mediumblue' }, '', '', '', '', ''],
           ],
         },
