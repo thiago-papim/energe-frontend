@@ -1,3 +1,4 @@
+/* eslint-disable max-lines */
 /* eslint-disable func-names */
 /* eslint-disable react-func/max-lines-per-function */
 /* eslint-disable max-len */
@@ -19,7 +20,13 @@ export default async function gerarPdfLaudoInstalacao(laudo) {
   const imagemEmpresa = async () => {
     if (empresa.imageUrl) {
       const imageUri = await getDirectImageURL(empresa.imageUrl);
-      return { image: imageUri, fit: [400, 300], alignment: 'center', colSpan: 6 };
+      return {
+        image: imageUri,
+        width: 525,
+        height: 350,
+        colSpan: 7,
+        alignment: 'center',
+        margin: [0, 0, 0, 0] };
     }
     return '';
   };
@@ -28,6 +35,8 @@ export default async function gerarPdfLaudoInstalacao(laudo) {
   const endereco = `${empresa.rua}, ${empresa.numero}.`;
   const fundoImage = await resultImage();
   pdfMake.vfs = pdfFonts.pdfMake.vfs;
+
+  const corAzul = 'mediumblue';
 
   const details = [
     {
@@ -39,32 +48,28 @@ export default async function gerarPdfLaudoInstalacao(laudo) {
       style: 'tableExample',
       color: '#444',
       table: {
-        widths: [60, '*', 'auto', '*', '*', '*'],
+        widths: [65, 65, '*', 30, 88, 'auto', 'auto'],
         body: [
-          [{ colSpan: 2, text: 'Empresa:', bold: true, color: 'red' }, '', { colSpan: 4, bold: true, text: `${empresa.nome}.` }, '', '', ''],
-          [{ colSpan: 2, text: 'Endereço:', bold: true, color: 'red' }, '', { colSpan: 4, bold: true, text: endereco }, '', '', ''],
-          [{ colSpan: 2, text: 'Cidade:', bold: true, color: 'red' }, '', { colSpan: 2, text: `${empresa.cidade}.`, bold: true }, '', { text: 'Estado', bold: true, color: 'red' }, { text: `${empresa.estado}.`, bold: true }],
-          [{ colSpan: 2, text: 'A/C. Sr(a):', bold: true, color: 'red' }, '', { text: `${ac}.`, bold: true }, { text: 'Departamento:', bold: true, color: 'red' }, { colSpan: 2, text: `${dpto}.`, bold: true }],
-          [{ text: textInitial, colSpan: 4, margin: [0, 15], bold: true, color: 'red' }, '', '', '', { colSpan: 2, qr: `https://energe-frontend-git-main-energeengenharia.vercel.app/clientes/${cnpjFomated}`, fit: '120', alignment: 'center' }, ''],
-          [await imagemEmpresa(), '', '', '', '', ''],
-          [{ text: 'Emissão:', colSpan: 2, bold: true, color: 'red' }, '', { text: dataAtual, bold: true }, { text: 'Validade:', colSpan: 2, bold: true, color: 'red' }, '', { text: dataVencimento, bold: true }],
-          [{ text: 'Responsável Técnico:', colSpan: 2, bold: true, color: 'red' }, '', { text: 'Valdir Amaro de Paula', bold: true }, { text: 'CREA-SP:', colSpan: 2, bold: true, color: 'red' }, '', { text: '5062453248', bold: true }],
+          [{ colSpan: 1, text: 'Empresa:', bold: true, color: 'red' }, { colSpan: 6, bold: true, text: `${empresa.nome}.`, color: corAzul }, '', '', '', '', ''],
+          [{ colSpan: 1, text: 'Endereço:', bold: true, color: 'red' }, { colSpan: 6, bold: true, text: endereco, color: corAzul }, '', '', '', '', ''],
+          [{ colSpan: 1, text: 'Cidade:', bold: true, color: 'red' }, { colSpan: 3, text: `${empresa.cidade}.`, bold: true, color: corAzul }, '', '', { text: 'Estado', bold: true, color: 'red' }, { text: `${empresa.estado}.`, colSpan: 2, bold: true, color: corAzul }, ''],
+          [{ colSpan: 1, text: 'A/C. Sr(a):', bold: true, color: 'red' }, { text: `${ac}.`, colSpan: 3, bold: true, color: corAzul }, '', '', { text: 'Departamento:', bold: true, color: 'red' }, { colSpan: 2, text: `${dpto}.`, bold: true, color: corAzul }, ''],
+          [{ text: textInitial, colSpan: 5, margin: [0, 15], color: 'red', alignment: 'justify' }, '', '', '', '', { colSpan: 2, qr: `https://energe-frontend-git-main-energeengenharia.vercel.app/clientes/${cnpjFomated}`, fit: '120', alignment: 'center' }, ''],
+          [await imagemEmpresa(), '', '', '', '', '', ''],
+          [{ text: 'Emissão:', colSpan: 2, bold: true, color: 'red' }, '', { text: dataAtual, colSpan: 2, bold: true, color: corAzul }, '', { text: 'Validade:', bold: true, color: 'red' }, { text: dataVencimento, colSpan: 2, bold: true, color: corAzul }, ''],
+          [{ text: 'Responsável Técnico:', border: [1, 1, 1, 0], colSpan: 2, bold: true, color: 'red' }, { text: '', border: [1, 1, 1, 0] }, { text: 'Valdir Amaro de Paula', colSpan: 2, bold: true, border: [1, 1, 1, 0], color: corAzul }, '', { text: 'CREA-SP:', bold: true, color: 'red', border: [1, 1, 1, 0] }, { text: '5062453248', colSpan: 2, bold: true, border: [1, 1, 1, 0], color: corAzul }, ''],
+          [{ border: [1, 0, 1, 1], colSpan: 2, text: '' }, '', { text: '', colSpan: 2, border: [1, 0, 1, 1] }, '', { border: [1, 0, 1, 1], text: 'CFT-SP:', bold: true, color: 'red' }, { border: [1, 0, 1, 1], text: '260208988', colSpan: 2, bold: true, color: corAzul }, ''],
         ],
       },
       margin: [14, 65, 10, 0],
-      fontSize: 13,
+      fontSize: 12,
     }];
 
   const mapPontos = await Promise.all(pontosLaudoInstalacao.map(async (ponto, i) => {
-    console.log('iniciando map');
-    const respostaMaiuscula = (string) => {
-      return string.charAt(0).toUpperCase() + string.slice(1);
-    };
     const imagensPonto = ponto.imagesPontoLaudo;
     const imagensUp = [];
 
     if (imagensPonto.length) {
-      console.log('testeeee');
       const processImage = async (url) => {
         const imageNow = await getDirectImageURL(url);
         imagensUp.push(imageNow);
@@ -75,22 +80,28 @@ export default async function gerarPdfLaudoInstalacao(laudo) {
     let imagensDataUri = [{ colSpan: 6, text: '' }, '', '', '', '', ''];
 
     if (imagensUp.length === 1) {
-      imagensDataUri = [{
-        image: imagensUp[0], width: 120, height: 120, alignment: 'center', colSpan: 6 }, '', '', '', '', ''];
+      imagensDataUri = [{ image: imagensUp[0], width: 200, height: 200, alignment: 'center', colSpan: 9, border: [1, 1, 1, 0] }, '', '', '', '', '', '', '', ''];
     } else if (imagensUp.length === 2) {
       imagensDataUri = [
-        { image: imagensUp[0], width: 120, height: 120, alignment: 'center', colSpan: 3 }, '', '',
-        { image: imagensUp[1], width: 120, height: 120, alignment: 'center', colSpan: 3 }, '', ''];
+        { image: imagensUp[0], width: 200, height: 200, alignment: 'right', colSpan: 4, border: [1, 1, 0, 0] }, '', '', '',
+        { text: '', border: [0, 1, 0, 0] },
+        { image: imagensUp[1], width: 200, height: 200, alignment: 'left', colSpan: 4, border: [0, 1, 1, 0] }, '', '', '',
+      ];
     } else if (imagensUp.length === 3) {
       imagensDataUri = [
-        { image: imagensUp[0], width: 120, height: 120, alignment: 'center', colSpan: 2 }, '',
-        { image: imagensUp[1], width: 120, height: 120, alignment: 'center', colSpan: 2 }, '',
-        { image: imagensUp[2], width: 120, height: 120, alignment: 'center', colSpan: 2 }, ''];
+        { image: imagensUp[0], width: 160, height: 160, alignment: 'center', colSpan: 3, border: [1, 1, 0, 0] }, '', '',
+        { image: imagensUp[1], width: 160, height: 160, alignment: 'center', colSpan: 3, border: [0, 1, 0, 0] }, '', '',
+        { image: imagensUp[2], width: 160, height: 160, alignment: 'center', colSpan: 3, border: [0, 1, 1, 0] }, '', ''];
     }
 
     const perguntasCompletas = perguntas.map((pergunta, ind) => {
       const respostas = ponto.respostas.split(',');
-      return [{ colSpan: 6, text: `${pergunta}.`, margin: [0, 5, 0, 5], bold: true, color: 'red' }, '', '', '', '', '', { text: respostaMaiuscula(respostas[ind]), alignment: 'center' }];
+      if (respostas[ind] === 'conforme') {
+        return [{ colSpan: 6, text: `${pergunta}.`, margin: [0, 0, 0, 0], color: 'red', lineHeight: 1 }, '', '', '', '', '', { text: 'X', alignment: 'center', margin: [0, 5, 0, 5], color: 'mediumblue', bold: true }, '', ''];
+      } if (respostas[ind] === 'não conforme') {
+        return [{ colSpan: 6, text: `${pergunta}.`, margin: [0, 0, 0, 0], color: 'red', lineHeight: 1 }, '', '', '', '', '', '', { text: 'X', alignment: 'center', margin: [0, 5, 0, 5], color: 'mediumblue', bold: true }, ''];
+      }
+      return [{ colSpan: 6, text: `${pergunta}.`, margin: [0, 0, 0, 0], color: 'red', lineHeight: 1 }, '', '', '', '', '', '', '', { text: 'X', alignment: 'center', margin: [0, 5, 0, 5], color: 'mediumblue', bold: true }];
     });
 
     return [[
@@ -105,7 +116,7 @@ export default async function gerarPdfLaudoInstalacao(laudo) {
         table: {
           widths: [60, '*', 'auto', '*', '*', '*', '*'],
           body: [
-            [{ colSpan: 2, text: 'Localização:', margin: [0, 5, 0, 5], bold: true, color: 'red', alignment: 'center' }, '', { colSpan: 3, margin: [0, 5, 0, 5], text: ponto.nome, bold: true, alignment: 'center' }, '', '', { text: 'Risco:', margin: [0, 5, 0, 5], bold: true, color: 'red', alignment: 'center' }, { text: ponto.risco, margin: [0, 5, 0, 5], bold: true, alignment: 'center' }],
+            [{ colSpan: 2, text: 'Localização:', margin: [0, 5, 0, 5], bold: true, color: 'red', alignment: 'center', border: [1, 1, 1, 0] }, '', { colSpan: 3, margin: [0, 5, 0, 5], text: ponto.nome, bold: true, alignment: 'center', color: 'mediumblue', border: [1, 1, 1, 0] }, '', '', { text: 'Risco:', margin: [0, 5, 0, 5], bold: true, color: 'red', alignment: 'center', border: [1, 1, 1, 0] }, { text: ponto.risco, margin: [0, 5, 0, 5], bold: true, alignment: 'center', color: 'mediumblue', border: [1, 1, 1, 0] }],
           ],
         },
         margin: [14, 65, 10, 0],
@@ -115,7 +126,7 @@ export default async function gerarPdfLaudoInstalacao(laudo) {
     [{
       color: '#444',
       table: {
-        widths: [60, '*', 'auto', '*', '*', '*'],
+        widths: ['*', '*', '*', '*', '*', '*', '*', '*', '*'],
         body: [
           imagensDataUri,
         ],
@@ -126,11 +137,22 @@ export default async function gerarPdfLaudoInstalacao(laudo) {
     [{
       color: '#444',
       table: {
-        widths: [60, '*', 'auto', '*', '*', '*', '*'],
+        widths: ['*', '*', '*', '*', '*', '*', 22, 22, 22],
         body: [
+          [{ colSpan: 6, text: 'Itens inspecionados', alignment: 'center', margin: [0, 5, 0, 5], color: 'red', bold: true }, '', '', '', '', '', { text: 'CF*', alignment: 'center', margin: [0, 5, 0, 5], color: 'red', bold: true }, { text: 'NC*', alignment: 'center', margin: [0, 5, 0, 5], color: 'red', bold: true }, { text: 'NA*', alignment: 'center', margin: [0, 5, 0, 5], color: 'red', bold: true }],
           ...perguntasCompletas,
-          [{ colSpan: 7, text: 'Diagnóstico:', bold: true, lineHeight: 2, color: 'red', border: [1, 1, 1, 0] }, '', '', '', '', '', ''],
-          [{ colSpan: 7, text: `${ponto.obs}`, bold: true, lineHeight: 4, border: [1, 0, 1, 1] }, '', '', '', '', '', ''],
+        ],
+      },
+      margin: [14, 0, 10, 0],
+      fontSize: 12,
+    }],
+    [{
+      color: '#444',
+      table: {
+        widths: ['*', '*', '*', '*', '*', '*'],
+        body: [
+          [{ colSpan: 6, text: 'Diagnóstico:', margin: [0, 5, 0, 0], bold: true, lineHeight: 1, color: 'red', border: [1, 0, 1, 0] }, '', '', '', '', ''],
+          [{ colSpan: 6, text: `${ponto.obs}`, bold: true, lineHeight: 4, border: [1, 0, 1, 1], color: 'mediumblue' }, '', '', '', '', ''],
         ],
       },
       margin: [14, 0, 10, 0],
@@ -156,7 +178,7 @@ export default async function gerarPdfLaudoInstalacao(laudo) {
         style: 'tableExample',
         alignment: 'justify',
         color: 'red',
-        fontSize: 13,
+        fontSize: 12,
         margin: [14, 65, 10, 0],
       }];
   });
@@ -175,20 +197,20 @@ export default async function gerarPdfLaudoInstalacao(laudo) {
         widths: [60, '*', '*', '*', '*', '*', '*'],
         body: [
           [{ colSpan: 7, text: 'Prioridades e riscos:', alignment: 'center', bold: true }, '', '', '', '', '', ''],
-          [{ colSpan: 1, text: 'Alta', alignment: 'center', color: 'red' }, { colSpan: 6, text: prioridadeAlta, color: 'red' }, '', '', '', '', ''],
+          [{ colSpan: 1, text: 'Alta', alignment: 'center', color: 'red', bold: true }, { colSpan: 6, text: prioridadeAlta, color: 'red' }, '', '', '', '', ''],
           [{ colSpan: 7, text: '', border: [0, 0, 0, 0] }, '', '', '', '', '', ''],
           [{ colSpan: 7, text: '', border: [0, 0, 0, 0] }, '', '', '', '', '', ''],
           [{ colSpan: 7, text: '', border: [0, 0, 0, 0] }, '', '', '', '', '', ''],
-          [{ colSpan: 1, text: 'Média', alignment: 'center', color: 'red' }, { colSpan: 6, text: prioridadeMedia, color: 'red' }, '', '', '', '', ''],
+          [{ colSpan: 1, text: 'Média', alignment: 'center', color: 'red', bold: true }, { colSpan: 6, text: prioridadeMedia, color: 'red' }, '', '', '', '', ''],
           [{ colSpan: 7, text: '', border: [0, 0, 0, 0] }, '', '', '', '', '', ''],
           [{ colSpan: 7, text: '', border: [0, 0, 0, 0] }, '', '', '', '', '', ''],
           [{ colSpan: 7, text: '', border: [0, 0, 0, 0] }, '', '', '', '', '', ''],
-          [{ colSpan: 1, text: 'Baixa', alignment: 'center', color: 'red' }, { colSpan: 6, text: prioridadeBaixa, color: 'red' }, '', '', '', '', ''],
+          [{ colSpan: 1, text: 'Baixa', alignment: 'center', color: 'red', bold: true }, { colSpan: 6, text: prioridadeBaixa, color: 'red' }, '', '', '', '', ''],
         ],
       },
       margin: [14, 65, 10, 0],
       alignment: 'justify',
-      fontSize: 13,
+      fontSize: 12,
     }];
 
   const paginaFinalDois = [
@@ -217,7 +239,7 @@ export default async function gerarPdfLaudoInstalacao(laudo) {
         ],
       },
       margin: [14, 20, 10, 0],
-      fontSize: 13,
+      fontSize: 12,
     }];
 
   const styles = {
@@ -227,9 +249,13 @@ export default async function gerarPdfLaudoInstalacao(laudo) {
   const docDefinitions = {
     pageSize: 'A4',
     pageMargins: [15, 50, 15, 80],
-    content: [details, ...detailsTexts,
+    content: [
+      details,
+      ...detailsTexts,
       ...mapPontos,
-      paginaFinalUm, paginaFinalDois],
+      paginaFinalUm,
+      paginaFinalDois,
+    ],
     styles,
     footer() {
       return {
@@ -237,7 +263,7 @@ export default async function gerarPdfLaudoInstalacao(laudo) {
           '\nE-mail: energe@energeengenharia.com.br - Site: www.energeengenharia.com.br'],
         alignment: 'center',
         fontSize: 12,
-        margin: [0, 10, 0, 0], // Ajuste conforme necessário
+        margin: [0, 10, 0, 0],
       };
     },
   };
