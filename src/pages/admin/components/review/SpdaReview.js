@@ -126,7 +126,7 @@ export default function SpdaReview() {
                   )}
                 </td>
                 <td className="border-x-2 border-gray-300">{spdaa.nome}</td>
-                <td className="border-x-2 border-gray-300">{spdaa.empresa.nome}</td>
+                <td className="border-x-2 border-gray-300">{spdaa.empresa?.nome}</td>
                 <td
                   className="border-x-2 border-gray-300"
                 >
