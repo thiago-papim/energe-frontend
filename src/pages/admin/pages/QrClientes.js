@@ -19,6 +19,7 @@ export default function QrClientes() {
   const cnpj = partesDaUrl[partesDaUrl.length - 1];
 
   useEffect(() => {
+    setLoading(true);
     const getEmpresa = async () => {
       const response = await axios.get(`${localhost}/companies/${cnpj}`);
       if (response.data.id) {
@@ -30,6 +31,7 @@ export default function QrClientes() {
     const getPdfs = async () => {
       const response = await axios.get(`${localhost}/pdf/${cnpj}`);
       setPdfs(response.data);
+      setLoading(false);
     };
     getEmpresa();
     getPdfs();
