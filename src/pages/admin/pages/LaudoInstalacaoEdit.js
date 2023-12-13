@@ -5,7 +5,8 @@ import React, { useContext, useEffect, useState } from 'react';
 import {
   Backdrop, Button, CircularProgress, FormControl,
   FormLabel,
-  InputLabel, MenuItem, Select, TextField, TextareaAutosize } from '@mui/material';
+  InputLabel, MenuItem, Select,
+  TextField, TextareaAutosize, useMediaQuery } from '@mui/material';
 import axios from 'axios';
 import { useHistory } from 'react-router-dom/cjs/react-router-dom.min';
 import HeaderAdmin from '../components/HeaderAdmin';
@@ -15,6 +16,7 @@ import PontosLaudoEdit from '../components/laudoInstalacao/PontosLaudoEdit';
 import { empresa } from '../examples/exemplos';
 
 export default function LaudoInstalacaoEdit() {
+  const isSmallScreen = useMediaQuery('(max-width:472px)');
   const { setEmpresaSelecionada, empresaSelecionada,
     laudoInstalacaoEdit, setLaudoInstalacaoEdit,
   } = useContext(AppContext);
@@ -215,7 +217,11 @@ export default function LaudoInstalacaoEdit() {
           >
             <MenuItem value="Manutenção">Manutenção</MenuItem>
             <MenuItem value="Operação">Operação</MenuItem>
-            <MenuItem value="Outro">Outro</MenuItem>
+            <MenuItem value="Compras">Compras</MenuItem>
+            <MenuItem value="Seg. Do Trabalho">Seg. Do Trabalho</MenuItem>
+            <MenuItem value="Financeiro">Financeiro</MenuItem>
+            <MenuItem value="Gerente">Gerente</MenuItem>
+            <MenuItem value="Diretoria">Diretoria</MenuItem>
           </Select>
         </FormControl>
         {
@@ -252,18 +258,19 @@ export default function LaudoInstalacaoEdit() {
               aria-label="minimum height"
               minRows={ 1 }
               placeholder="  Escreva Aqui"
-              className="bg-gray-100 rounded-xl max-w-[500px] border-2
-              border-gray-300 p-2"
+              className={ `bg-gray-100 rounded-xl border-2 
+              ${isSmallScreen ? 'w-full' : 'w-[450px]'}
+              border-gray-300 p-2` }
             />
           </FormControl>
         </div>
         <Button
           className="my-4"
-          // disabled={
-          //   validButton
-          //   || !laudoInstalacaoEdit.pontos?.length
-          //   || laudoInstalacaoEdit.pontos?.some((e) => e.edit)
-          // }
+          disabled={
+            validButton
+            || !laudoInstalacaoEdit.pontos?.length
+            || laudoInstalacaoEdit.pontos?.some((e) => e.edit)
+          }
           variant="contained"
           onClick={ () => finishLaudo() }
         >

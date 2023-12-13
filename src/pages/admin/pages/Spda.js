@@ -171,7 +171,11 @@ export default function Spda() {
           >
             <MenuItem value="Manutenção">Manutenção</MenuItem>
             <MenuItem value="Operação">Operação</MenuItem>
-            <MenuItem value="Outro">Outro</MenuItem>
+            <MenuItem value="Compras">Compras</MenuItem>
+            <MenuItem value="Seg. Do Trabalho">Seg. Do Trabalho</MenuItem>
+            <MenuItem value="Financeiro">Financeiro</MenuItem>
+            <MenuItem value="Gerente">Gerente</MenuItem>
+            <MenuItem value="Diretoria">Diretoria</MenuItem>
           </Select>
         </FormControl>
         {
@@ -193,7 +197,10 @@ export default function Spda() {
             </Button>
           )
         }
-        <PontosSpda disabledButton={ completeInitial } pontos={ spda.pontosSpda } />
+        <PontosSpda
+          disabledButton={ completeInitial }
+          pontos={ spda.pontosSpda }
+        />
         <div className="flex justify-center min-w-[400px] w-full">
           <FormControl
             className="rounded-xl w-full flex justify-center items-center border-2 p-2"
