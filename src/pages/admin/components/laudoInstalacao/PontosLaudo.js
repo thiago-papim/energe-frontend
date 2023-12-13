@@ -164,13 +164,13 @@ export default function PontosLaudo({ disabledButton, pontos }) {
                 <Typography variant="overline" display="block" gutterBottom style={ { fontSize: '15px', fontWeight: 'bold' } }>
                   {`Risco: ${formulario.risco}`}
                 </Typography>
-                <div className="flex justify-center w-full">
+                <div className="flex flex-wrap md:flex-nowrap justify-center w-full">
                   { formulario.imagensUrl.map((e, i) => (
                     <img
                       key={ i }
                       src={ e.imageUrl }
                       alt={ `Imagem ${i}` }
-                      className="w-[150px] h-[150px] mx-2"
+                      className="w-[150px] h-[150px] m-2"
                     />
                   ))}
                 </div>
@@ -228,7 +228,7 @@ export default function PontosLaudo({ disabledButton, pontos }) {
                   </Select>
                 </FormControl>
                 <div className="flex flex-col items-center">
-                  <div className="flex justify-center">
+                  <div className="flex flex-wrap md:flex-nowrap justify-center">
                     {/* imagens */}
                     { formulario.imagensUrl?.map((e, i) => (
                       <div key={ i } className="flex flex-col items-center">
