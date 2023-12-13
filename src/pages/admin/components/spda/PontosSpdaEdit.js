@@ -31,6 +31,8 @@ export default function PontosSpda({ disabledButton, pontos }) {
   const [spdaDelete, setSpdaDelete] = useState([]);
   const [formularios, setFormularios] = useState([]);
 
+  console.log(formularios);
+
   useEffect(() => {
     const spdas = { ...spdaEdit };
     spdas.pontos = formularios;
@@ -152,7 +154,7 @@ export default function PontosSpda({ disabledButton, pontos }) {
     for (let i = 0; i < imagem.length; i += 1) {
       const file = imagem[i];
       const imageUrl = URL.createObjectURL(file);
-      if (novosFormularios[index].imagensUrl.length < 3) {
+      if (novosFormularios[index].imagensUrl.length < 4) {
         novosFormularios[index].imagensUrl.push({ file, imageUrl });
       }
     }
@@ -244,7 +246,7 @@ export default function PontosSpda({ disabledButton, pontos }) {
                   ))}
                 </div>
                 <Button
-                  disabled={ formulario.imagensUrl.length > 2 }
+                  disabled={ formulario.imagensUrl.length > 3 }
                   className="my-4"
                   component="label"
                   variant="contained"

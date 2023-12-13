@@ -36,8 +36,7 @@ export default function SendFile() {
     formData.append('nome', name);
     formData.append('empresaId', empresaSelecionada.id);
     formData.append('image', pdfFile[0]);
-    const response = await axios.post(`${localhost}/pdf`, formData);
-    console.log(response);
+    await axios.post(`${localhost}/pdf`, formData);
     setLoading(false);
     setOpenAlert(true);
     removePdf();
