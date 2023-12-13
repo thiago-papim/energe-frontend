@@ -88,6 +88,12 @@ export default async function gerarPdfSpda(spda) {
         { image: imagensUp[0], width: 160, height: 160, alignment: 'center', colSpan: 3, border: [1, 1, 0, 0] }, '', '',
         { image: imagensUp[1], width: 160, height: 160, alignment: 'center', colSpan: 3, border: [0, 1, 0, 0] }, '', '',
         { image: imagensUp[2], width: 160, height: 160, alignment: 'center', colSpan: 3, border: [0, 1, 1, 0] }, '', ''];
+    } else if (imagensUp.length === 4) {
+      imagensDataUri = [
+        { image: imagensUp[0], width: 126, height: 126, alignment: 'center', colSpan: 2, border: [1, 1, 0, 0] }, '',
+        { image: imagensUp[1], width: 126, height: 126, alignment: 'center', colSpan: 2, border: [0, 1, 0, 0] }, '',
+        { image: imagensUp[2], width: 126, height: 126, alignment: 'center', colSpan: 2, border: [0, 1, 0, 0] }, '',
+        { image: imagensUp[3], width: 126.07, height: 126.07, alignment: 'center', colSpan: 2, border: [0, 1, 1, 0] }, '', { text: '', border: [0, 0, 0, 0] }];
     }
 
     const perguntasCompletas = perguntas.map((pergunta, ind) => {

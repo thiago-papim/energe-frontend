@@ -83,7 +83,7 @@ export default function PontosSpda({ disabledButton, pontos }) {
     for (let i = 0; i < imagem.length; i += 1) {
       const file = imagem[i];
       const imageUrl = URL.createObjectURL(file);
-      if (novosFormularios[index].imagensUrl.length < 3) {
+      if (novosFormularios[index].imagensUrl.length < 4) {
         novosFormularios[index].imagensUrl.push({ file, imageUrl });
       }
     }
@@ -220,7 +220,7 @@ export default function PontosSpda({ disabledButton, pontos }) {
                     ))}
                   </div>
                   <Button
-                    disabled={ formulario.imagens?.length > 2 }
+                    disabled={ formulario.imagens?.length > 3 }
                     className="my-4"
                     component="label"
                     variant="contained"
