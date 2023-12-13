@@ -188,13 +188,13 @@ export default function PontosLaudoEdit({ disabledButton, pontos }) {
                 <Typography variant="overline" display="block" gutterBottom style={ { fontSize: '15px', fontWeight: 'bold' } }>
                   {`Risco: ${formulario.risco}`}
                 </Typography>
-                <div className="flex justify-center w-full">
+                <div className="flex flex-wrap md:flex-nowrap justify-center w-full">
                   { formulario.imagensUrl.map((e, i) => (
                     <img
                       key={ i }
                       src={ e.url ? `https://energe.s3.amazonaws.com/${e.url}` : e.imageUrl }
                       alt={ `Imagem ${i}` }
-                      className="w-[150px] h-[150px] mx-2"
+                      className="w-[150px] h-[150px] m-2"
                     />
                   ))}
                 </div>
@@ -251,7 +251,7 @@ export default function PontosLaudoEdit({ disabledButton, pontos }) {
                     <MenuItem value="Alto">Alto</MenuItem>
                   </Select>
                 </FormControl>
-                <div className="flex">
+                <div className="flex flex-wrap md:flex-nowrap justify-center">
                   { formulario.imagensUrl.map((e, i) => (
                     <div
                       key={ i }
