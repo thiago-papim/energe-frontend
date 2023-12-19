@@ -22,3 +22,9 @@ export const laudoExample = {
   pontos: [],
   resume: '',
 };
+
+export const ensaioExample = {
+  empresa,
+  nome: '',
+  pontos: [],
+};

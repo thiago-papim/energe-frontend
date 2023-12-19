@@ -7,6 +7,7 @@ import SpdaReview from '../components/review/SpdaReview';
 import LaudoInstalacaoReview from '../components/review/LaudoInstalacaoReview';
 import AppContext from '../../../context/AppContext';
 import { laudoExample, spdaExample } from '../examples/exemplos';
+import EnsaioEquipamentoReview from '../components/review/EnsaioEquipamentoReview';
 
 export default function Review() {
   const { setSpdaEdit, setLaudoInstalacaoEdit } = useContext(AppContext);
@@ -29,6 +30,7 @@ export default function Review() {
             <TabList onChange={ handleChange } aria-label="lab API tabs example">
               <Tab label="SPDA" value="1" />
               <Tab label="Laudo de Instalação" value="2" />
+              <Tab label="Ensaio de Equipamento" value="3" />
             </TabList>
           </Box>
           <TabPanel value="1">
@@ -36,6 +38,9 @@ export default function Review() {
           </TabPanel>
           <TabPanel value="2">
             <LaudoInstalacaoReview />
+          </TabPanel>
+          <TabPanel value="3">
+            <EnsaioEquipamentoReview />
           </TabPanel>
         </TabContext>
       </Box>

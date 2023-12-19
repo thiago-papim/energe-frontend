@@ -1,17 +1,23 @@
 import PropTypes from 'prop-types';
 import { useMemo, useState } from 'react';
 import AppContext from './AppContext';
-import { empresa, laudoExample, spdaExample } from '../pages/admin/examples/exemplos';
+import {
+  empresa, ensaioExample, laudoExample, spdaExample,
+} from '../pages/admin/examples/exemplos';
 
 function AppProvider({ children }) {
   const [selectHeader, setSelectHeader] = useState('home');
   const [empresaSelecionada, setEmpresaSelecionada] = useState(empresa);
   // SPDA
   const [spda, setSpda] = useState(spdaExample);
-  const [laudoInstalacao, setLaudoInstalacao] = useState(laudoExample);
   const [spdaEdit, setSpdaEdit] = useState(spdaExample);
-  const [laudoInstalacaoEdit, setLaudoInstalacaoEdit] = useState(laudoExample);
   const [pontosSpda, setPontosSdpa] = useState([]);
+  // Laudo de Instalação
+  const [laudoInstalacao, setLaudoInstalacao] = useState(laudoExample);
+  const [laudoInstalacaoEdit, setLaudoInstalacaoEdit] = useState(laudoExample);
+  // Ensaio de Equipamentos
+  const [ensaioEquipamento, setEnsaioEquipamento] = useState(ensaioExample);
+  const [ensaioEquipamentoEdit, setEnsaioEquipamentoEdit] = useState(ensaioExample);
 
   const values = useMemo(
     () => ({
@@ -29,6 +35,10 @@ function AppProvider({ children }) {
       setSpdaEdit,
       laudoInstalacaoEdit,
       setLaudoInstalacaoEdit,
+      ensaioEquipamento,
+      setEnsaioEquipamento,
+      ensaioEquipamentoEdit,
+      setEnsaioEquipamentoEdit,
     }),
     [
       selectHeader,
@@ -38,6 +48,8 @@ function AppProvider({ children }) {
       spdaEdit,
       laudoInstalacao,
       laudoInstalacaoEdit,
+      ensaioEquipamento,
+      ensaioEquipamentoEdit,
     ],
   );
 
