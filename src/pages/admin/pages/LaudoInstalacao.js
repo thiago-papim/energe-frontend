@@ -3,7 +3,8 @@ import React, { useContext, useEffect, useState } from 'react';
 import {
   Backdrop, Button, CircularProgress, FormControl,
   FormLabel,
-  InputLabel, MenuItem, Select, TextField, TextareaAutosize } from '@mui/material';
+  InputLabel, MenuItem, Select,
+  TextField, TextareaAutosize, useMediaQuery } from '@mui/material';
 import axios from 'axios';
 import { useHistory } from 'react-router-dom/cjs/react-router-dom.min';
 import HeaderAdmin from '../components/HeaderAdmin';
@@ -13,6 +14,7 @@ import { laudoExample, empresa } from '../examples/exemplos';
 import PontosLaudo from '../components/laudoInstalacao/PontosLaudo';
 
 export default function LaudoInstalacao() {
+  const isSmallScreen = useMediaQuery('(max-width:472px)');
   const {
     laudoInstalacao,
     setLaudoInstalacao,
@@ -167,7 +169,11 @@ export default function LaudoInstalacao() {
           >
             <MenuItem value="Manutenção">Manutenção</MenuItem>
             <MenuItem value="Operação">Operação</MenuItem>
-            <MenuItem value="Outro">Outro</MenuItem>
+            <MenuItem value="Compras">Compras</MenuItem>
+            <MenuItem value="Seg. Do Trabalho">Seg. Do Trabalho</MenuItem>
+            <MenuItem value="Financeiro">Financeiro</MenuItem>
+            <MenuItem value="Gerente">Gerente</MenuItem>
+            <MenuItem value="Diretoria">Diretoria</MenuItem>
           </Select>
         </FormControl>
         {
@@ -193,7 +199,7 @@ export default function LaudoInstalacao() {
           disabledButton={ completeInitial }
           pontos={ laudoInstalacao.pontosLaudo }
         />
-        <div className="flex justify-center w-[450px]">
+        <div className="flex justify-center min-w-[400px] w-full">
           <FormControl
             className="rounded-xl w-full flex justify-center items-center border-2 p-2"
           >
@@ -204,8 +210,9 @@ export default function LaudoInstalacao() {
               aria-label="minimum height"
               minRows={ 1 }
               placeholder="  Escreva Aqui"
-              className="bg-gray-100 rounded-xl max-w-[500px] border-2
-              border-gray-300 p-2"
+              className={ `bg-gray-100 rounded-xl border-2 
+              ${isSmallScreen ? 'w-full' : 'w-[450px]'}
+              border-gray-300 p-2` }
             />
           </FormControl>
         </div>

@@ -7,7 +7,6 @@ import axios from 'axios';
 import HeaderAdmin from '../components/HeaderAdmin';
 import { empresa, laudoExample, spdaExample } from '../examples/exemplos';
 import AppContext from '../../../context/AppContext';
-import getDirectImageURL from '../../../services/pdfImage';
 
 export default function HomeAdmin() {
   const history = useHistory();
@@ -49,14 +48,28 @@ export default function HomeAdmin() {
         </Button>
         <Button
           variant="contained"
-          className="w-[250px]"
+          className="w-[250px] mb-4"
           onClick={ () => {
             setSpda(spdaExample);
+            setSpdaEdit(spdaExample);
+            setLaudoInstalacao(laudoExample);
+            setLaudoInstalacaoEdit(laudoExample);
             setEmpresaSelecionada(empresa);
             history.push('/laudo-de-instalacoes');
           } }
         >
           Laudo de Instalações
+        </Button>
+        <Button
+          variant="contained"
+          className="w-[250px]"
+          onClick={ () => {
+            setSpda(spdaExample);
+            setEmpresaSelecionada(empresa);
+            history.push('/ensaio-de-equipamento');
+          } }
+        >
+          Ensaio de Equipamentos
         </Button>
       </div>
     </div>

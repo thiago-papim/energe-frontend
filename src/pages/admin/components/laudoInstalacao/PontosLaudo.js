@@ -37,8 +37,6 @@ export default function PontosLaudo({ disabledButton, pontos }) {
     });
   }, [formularios]);
 
-  console.log(formularios);
-
   useEffect(() => {
     if (pontos) {
       setFormularios(pontos.map((ponto) => {
