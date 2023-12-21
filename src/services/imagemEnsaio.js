@@ -1,6 +1,6 @@
 /* eslint-disable no-magic-numbers */
 
-import table from '../imagens/testeEnsaio.png';
+import table from '../imagens/table.png';
 import logo from '../imagens/fundoPdf.jpg';
 
 export function getArrayBufferFromImage(imagePath) {

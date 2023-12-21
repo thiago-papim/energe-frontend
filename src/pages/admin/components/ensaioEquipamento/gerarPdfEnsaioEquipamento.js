@@ -10,6 +10,7 @@ import JsBarcode from 'jsbarcode';
 import pdfFonts from 'pdfmake/build/vfs_fonts';
 import { obterDataFormatada } from '../../../../services/datasEmissaoValidade';
 import { resultImageTable, resultImageLogo } from '../../../../services/imagemEnsaio';
+import getDirectImageURL from '../../../../services/pdfImage';
 
 export default async function gerarPdfEnsaioEquipamento(ensaio) {
   const normas = 'NBR14540/NBR11854/ASTMF711/NR-10';
@@ -27,8 +28,8 @@ export default async function gerarPdfEnsaioEquipamento(ensaio) {
 
   pdfMake.vfs = pdfFonts.pdfMake.vfs;
 
-  const details = pontosEnsaioEquipamento.map((ponto, i) => {
-    console.log(ponto);
+  const details = await Promise.all(pontosEnsaioEquipamento.map(async (ponto, i) => {
+    const imageUri = await getDirectImageURL(ponto.imgUrl);
     const validPage = i === 0;
     const marginResult = () => {
       if (ponto.ladoDireito === '<16' && ponto.ladoEsquerdo === '<16') {
@@ -64,18 +65,18 @@ export default async function gerarPdfEnsaioEquipamento(ensaio) {
       {
         color: '#444',
         table: {
-          widths: [65, 65, '*', 30, 88, 'auto', 'auto'],
+          widths: [50, 65, '*', 30, 88, 'auto', 'auto'],
           body: [
             [
               { colSpan: 1, text: '', color: 'mediumred', border: [0, 0, 0, 0] },
-              { colSpan: 2, text: `${empresa.nome}`, color: 'red', border: [0, 0, 0, 0] }, '', { colSpan: 4, text: `${dataAtual}`, margin: [53, 0, 0, 0], color: 'red', border: [0, 0, 0, 0] }, '', '', ''],
+              { colSpan: 2, text: `${empresa.nome}`, color: 'red', border: [0, 0, 0, 0] }, '', { colSpan: 4, text: `${dataAtual}`, margin: [56, 0, 0, 0], color: 'red', border: [0, 0, 0, 0] }, '', '', ''],
             [
               { colSpan: 1, text: '', color: 'mediumred', border: [0, 0, 0, 0] },
-              { colSpan: 2, text: `${endereco}`, color: 'red', border: [0, 0, 0, 0] }, '', { colSpan: 4, text: `${empresa.cidade}`, margin: [65, 0, 0, 0], color: 'red', border: [0, 0, 0, 0] }, '', '', ''],
+              { colSpan: 2, text: `${endereco}`, color: 'red', margin: [1, 1, 0, 0], border: [0, 0, 0, 0] }, '', { colSpan: 4, text: `${empresa.cidade}`, margin: [69, 1, 0, 0], color: 'red', border: [0, 0, 0, 0] }, '', '', ''],
           ],
         },
-        margin: [0, 20, 10, 0],
-        fontSize: 12,
+        margin: [16, 22, 10, 0],
+        fontSize: 11,
       },
       {
         color: '#444',
@@ -116,10 +117,10 @@ export default async function gerarPdfEnsaioEquipamento(ensaio) {
         fontSize: 12,
       },
       {
-        image: generateBarcode('123456789', `*10000000${i + 1}*`),
-        width: 250,
-        height: 70,
-        absolutePosition: { x: 303, y: 220 },
+        image: imageUri,
+        width: 270,
+        height: 90,
+        absolutePosition: { x: 296.5, y: 205 },
       },
       {
         color: '#444',
@@ -135,7 +136,7 @@ export default async function gerarPdfEnsaioEquipamento(ensaio) {
         fontSize: 12,
       },
     ];
-  });
+  }));
 
   const docDefinitions = {
     pageSize: 'A4',

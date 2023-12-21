@@ -5,12 +5,14 @@ import { Button } from '@mui/material';
 import { useHistory } from 'react-router-dom';
 import axios from 'axios';
 import HeaderAdmin from '../components/HeaderAdmin';
-import { empresa, laudoExample, spdaExample } from '../examples/exemplos';
+import { empresa, ensaioExample, laudoExample, spdaExample } from '../examples/exemplos';
 import AppContext from '../../../context/AppContext';
 
 export default function HomeAdmin() {
   const history = useHistory();
-  const { setSpda, setSpdaEdit, setLaudoInstalacao, setLaudoInstalacaoEdit, setEmpresaSelecionada } = useContext(AppContext);
+  const { setSpda, setSpdaEdit,
+    setLaudoInstalacao, setLaudoInstalacaoEdit,
+    setEmpresaSelecionada, setEnsaioEquipamento, setEnsaioEquipamentoEdit } = useContext(AppContext);
   const localhost = process.env.REACT_APP_LOCAL_HOST;
 
   useEffect(() => {
@@ -40,6 +42,8 @@ export default function HomeAdmin() {
             setSpdaEdit(spdaExample);
             setLaudoInstalacao(laudoExample);
             setLaudoInstalacaoEdit(laudoExample);
+            setEnsaioEquipamento(ensaioExample);
+            setEnsaioEquipamentoEdit(ensaioExample);
             setEmpresaSelecionada(empresa);
             history.push('/spda');
           } }
@@ -54,6 +58,8 @@ export default function HomeAdmin() {
             setSpdaEdit(spdaExample);
             setLaudoInstalacao(laudoExample);
             setLaudoInstalacaoEdit(laudoExample);
+            setEnsaioEquipamento(ensaioExample);
+            setEnsaioEquipamentoEdit(ensaioExample);
             setEmpresaSelecionada(empresa);
             history.push('/laudo-de-instalacoes');
           } }
@@ -62,15 +68,36 @@ export default function HomeAdmin() {
         </Button>
         <Button
           variant="contained"
-          className="w-[250px]"
+          className="w-[250px] mb-4"
           onClick={ () => {
             setSpda(spdaExample);
+            setSpdaEdit(spdaExample);
+            setLaudoInstalacao(laudoExample);
+            setLaudoInstalacaoEdit(laudoExample);
+            setEnsaioEquipamento(ensaioExample);
+            setEnsaioEquipamentoEdit(ensaioExample);
             setEmpresaSelecionada(empresa);
             history.push('/ensaio-de-equipamento');
           } }
         >
           Ensaio de Equipamentos
         </Button>
+        {/* <Button
+          variant="contained"
+          className="w-[280px]"
+          onClick={ () => {
+            setSpda(spdaExample);
+            setSpdaEdit(spdaExample);
+            setLaudoInstalacao(laudoExample);
+            setLaudoInstalacaoEdit(laudoExample);
+            setEnsaioEquipamento(ensaioExample);
+            setEnsaioEquipamentoEdit(ensaioExample);
+            setEmpresaSelecionada(empresa);
+            history.push('/cabines-museu');
+          } }
+        >
+          Manutenção Cabines Museu
+        </Button> */}
       </div>
     </div>
   );

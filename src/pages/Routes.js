@@ -16,6 +16,7 @@ import NotFound from './admin/pages/NotFound';
 import Clientes from './Clientes';
 import EnsaioEquipamento from './admin/pages/EnsaioEquipamento';
 import EnsaioEquipamentoEdit from './admin/pages/EnsaioEquipamentoEdit';
+// import CabinesMuseu from './admin/pages/CabinesMuseu';
 
 function Routes() {
   return (
@@ -31,6 +32,7 @@ function Routes() {
       <Route exact path="/laudo-edit" component={ LaudoInstalacaoEdit } />
       <Route exact path="/ensaio-de-equipamento" component={ EnsaioEquipamento } />
       <Route exact path="/ensaio-edit" component={ EnsaioEquipamentoEdit } />
+      {/* <Route exact path="/cabines-museu" component={ CabinesMuseu } /> */}
       <Route exact path="/empresas" component={ Empresas } />
       <Route exact path="/send" component={ SendFile } />
       <Route exact path="/clientes/:cnpj" component={ QrClientes } />

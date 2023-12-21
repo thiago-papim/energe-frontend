@@ -101,6 +101,21 @@ export default function PontosEnsaio({ disabledBtn }) {
     setFormularios(novosFormularios);
   };
 
+  const adicionarImagem = (index, file) => {
+    const novosFormularios = [...formularios];
+    const imageUrl = URL.createObjectURL(file[0]);
+    novosFormularios[index].imgFile = file;
+    novosFormularios[index].imgUrl = imageUrl;
+    setFormularios(novosFormularios);
+  };
+
+  const removerImagem = (index) => {
+    const novosFormularios = [...formularios];
+    novosFormularios[index].imgUrl = null;
+    novosFormularios[index].imgFile = null;
+    setFormularios(novosFormularios);
+  };
+
   return (
     <div className="mt-3">
       { formularios.map((formulario, index) => (
@@ -116,6 +131,13 @@ export default function PontosEnsaio({ disabledBtn }) {
               <Typography>{ `Lado Direito: ${formulario.ladoDireito}`}</Typography>
               { formulario.obs ? (
                 <Typography>{ `Obs: ${formulario.obs}`}</Typography>
+              ) : ''}
+              { formulario.imgUrl ? (
+                <img
+                  src={ formulario.imgUrl }
+                  alt={ `Imagem ${index}` }
+                  className="w-[250px] h-[150px] mx-2 mb-2"
+                />
               ) : ''}
               <div className="flex justify-center items-center">
                 <Button
@@ -205,10 +227,47 @@ export default function PontosEnsaio({ disabledBtn }) {
                   </FormControl>
                 </div>
               </div>
+              <div className="flex flex-wrap md:flex-nowrap justify-center">
+                {/* imagem */}
+                { formulario.imgUrl ? (
+                  <div key={ index } className="flex flex-col items-center">
+                    <img
+                      src={ formulario.imgUrl }
+                      alt={ `Imagem ${index}` }
+                      className="w-[250px] h-[150px] mx-2"
+                    />
+                    <Button
+                      className="w-2/3 m-2"
+                      variant="contained"
+                      onClick={ () => removerImagem(index) }
+                    >
+                      REMOVER IMAGEM
+                    </Button>
+                  </div>
+                ) : ''}
+                {/* ))} */}
+              </div>
+              { !formulario.imgUrl ? (
+                <Button
+                  disabled={ formulario.imgUrl?.length === 2 }
+                  className="my-4"
+                  component="label"
+                  variant="contained"
+                >
+                  Adicionar Imagem
+                  <input
+                    type="file"
+                    id="sendImage"
+                    accept=".jpg, .jpeg, .png"
+                    style={ { display: 'none' } }
+                    onChange={ (e) => adicionarImagem(index, e.target.files) }
+                  />
+                </Button>
+              ) : ''}
               <Button
                 className="my-3"
                 variant="contained"
-                disabled={ !formulario.nome }
+                disabled={ !formulario.nome || !formulario.imgUrl }
                 onClick={ concluirFormulario }
               >
                 Concluir Equipamento
