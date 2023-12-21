@@ -43,6 +43,7 @@ export default function EnsaioEquipamento() {
       formData.append('ladoEsquerdo', ponto.ladoEsquerdo);
       formData.append('ladoDireito', ponto.ladoDireito);
       formData.append('obs', ponto.obs);
+      formData.append('image', ponto.imgFile[0]);
       try {
         await axios.post(`${localhost}/ensaio/ponto`, formData);
       } catch (error) {

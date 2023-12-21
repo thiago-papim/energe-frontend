@@ -2,7 +2,7 @@ import PropTypes from 'prop-types';
 import { useMemo, useState } from 'react';
 import AppContext from './AppContext';
 import {
-  empresa, ensaioExample, laudoExample, spdaExample,
+  empresa, ensaioExample, laudoExample, museuExample, spdaExample,
 } from '../pages/admin/examples/exemplos';
 
 function AppProvider({ children }) {
@@ -18,6 +18,8 @@ function AppProvider({ children }) {
   // Ensaio de Equipamentos
   const [ensaioEquipamento, setEnsaioEquipamento] = useState(ensaioExample);
   const [ensaioEquipamentoEdit, setEnsaioEquipamentoEdit] = useState(ensaioExample);
+  // Museu
+  const [cabineMuseu, setCabineMuseu] = useState(museuExample);
 
   const values = useMemo(
     () => ({
@@ -39,6 +41,8 @@ function AppProvider({ children }) {
       setEnsaioEquipamento,
       ensaioEquipamentoEdit,
       setEnsaioEquipamentoEdit,
+      cabineMuseu,
+      setCabineMuseu,
     }),
     [
       selectHeader,
@@ -50,6 +54,7 @@ function AppProvider({ children }) {
       laudoInstalacaoEdit,
       ensaioEquipamento,
       ensaioEquipamentoEdit,
+      cabineMuseu,
     ],
   );
 

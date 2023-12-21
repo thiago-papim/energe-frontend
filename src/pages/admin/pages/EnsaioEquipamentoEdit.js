@@ -1,4 +1,3 @@
-/* eslint-disable no-unused-vars */
 /* eslint-disable react/prop-types */
 import React, { useContext, useEffect, useState } from 'react';
 import { Backdrop, Button, CircularProgress, TextField } from '@mui/material';
@@ -28,6 +27,8 @@ export default function EnsaioEquipamentoEdit() {
     setCompleteInitial(true);
   }, [ensaioEquipamentoEdit, setEmpresaSelecionada]);
 
+  console.log(ensaioEquipamentoEdit);
+
   const validButton = !nomeEnsaio || !ensaioEquipamentoEdit.empresa.nome;
 
   const handleNameEnsaio = ({ target: { value } }) => {
@@ -52,6 +53,9 @@ export default function EnsaioEquipamentoEdit() {
         formData.append('ladoEsquerdo', ponto.ladoEsquerdo);
         formData.append('ladoDireito', ponto.ladoDireito);
         formData.append('obs', ponto.obs);
+        if (ponto.imgFile) {
+          formData.append('image', ponto.imgFile[0]);
+        }
         try {
           const response = await axios.post(`${localhost}/ensaio/ponto`, formData);
           if (response.status === statusOk) {
@@ -75,6 +79,10 @@ export default function EnsaioEquipamentoEdit() {
         formData.append('ladoEsquerdo', ponto.ladoEsquerdo);
         formData.append('ladoDireito', ponto.ladoDireito);
         formData.append('obs', ponto.obs);
+        if (ponto.imgFile) {
+          console.log(ponto.imgFile);
+          formData.append('image', ponto.imgFile[0]);
+        }
         try {
           const teste = await axios
             .put(`${localhost}/ensaio/ponto/${pontoEnsaioId}`, formData);
