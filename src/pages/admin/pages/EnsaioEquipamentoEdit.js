@@ -24,10 +24,11 @@ export default function EnsaioEquipamentoEdit() {
   useEffect(() => {
     setNomeEnsaio(ensaioEquipamentoEdit.nome);
     setEmpresaSelecionada(ensaioEquipamentoEdit.empresa);
-    setCompleteInitial(true);
   }, [ensaioEquipamentoEdit, setEmpresaSelecionada]);
 
-  console.log(ensaioEquipamentoEdit);
+  useEffect(() => {
+    setCompleteInitial(true);
+  }, []);
 
   const validButton = !nomeEnsaio || !ensaioEquipamentoEdit.empresa.nome;
 
